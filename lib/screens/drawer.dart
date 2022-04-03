@@ -26,10 +26,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 children: const [
                   DrawerTop(),
                   MenuItem(icon: Icons.account_circle, text: "My Account"),
-                  MenuItem(
-                      icon: Icons.shopping_cart_outlined,
-                      text: "Shopping Cart"),
-                  MenuItem(icon: Icons.history, text: "Order History"),
+                
                   Divider(),
                   MenuItem(icon: Icons.settings, text: "Settings"),
                   LogOut(),
