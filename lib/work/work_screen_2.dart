@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/movie.dart';
+import 'package:latest_movies_app/providers/movies_prov.dart';
+import 'package:provider/provider.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WorkScreen2 extends StatefulWidget {
   final Movie movie;
@@ -10,6 +13,16 @@ class WorkScreen2 extends StatefulWidget {
 }
 
 class _WorkScreen2State extends State<WorkScreen2> {
+  YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: 'K18cpp_-gP8',
+    params: YoutubePlayerParams(
+      playlist: ['nPt8bK2gbaU', 'gQDByCdjUXw'], // Defining custom playlist
+      startAt: Duration(seconds: 30),
+      showControls: true,
+      showFullscreenButton: true,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     Movie movieItem = widget.movie;
@@ -21,6 +34,37 @@ class _WorkScreen2State extends State<WorkScreen2> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              FutureBuilder(
+                  future: Provider.of<MoviesProv>(context, listen: false)
+                      .getTrailer(movieId: movieItem.id.toString()),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    print(snapshot.data);
+                    return Expanded(
+                      child: YoutubePlayerControllerProvider(
+                        // Provides controller to all the widget below it.
+                        controller: _controller,
+                        child: YoutubePlayerIFrame(
+                          controller: YoutubePlayerController(
+                            initialVideoId: 'K18cpp_-gP8',
+                            params: YoutubePlayerParams(
+                              playlist: [
+                                (snapshot.data as String)
+                              ], // Defining custom playlist
+                              // startAt: Duration(seconds: 30),
+                              showControls: true,
+                              showFullscreenButton: true,
+                            ),
+                          ),
+                          aspectRatio: 16 / 9,
+                        ),
+                      ),
+                    );
+                  }),
               Text("poster image"),
               Image.network(
                 movieItem.posterPath ?? "",

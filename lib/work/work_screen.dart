@@ -3,6 +3,7 @@ import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/work/work_screen_2.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WorkScreen extends StatefulWidget {
   const WorkScreen({Key? key}) : super(key: key);
@@ -18,77 +19,97 @@ class _WorkScreenState extends State<WorkScreen> {
     MoviesProv prov = Provider.of<MoviesProv>(context, listen: false);
 
     return Scaffold(
+      floatingActionButton: Consumer<MoviesProv>(
+        builder: (context, value, child) => FloatingActionButton(
+          onPressed: () async {
+            value.currentPageNumber;
+            if (value.currentPageNumber < (prov.totalLatestPages as num)) {
+              value.currentPageNumber++;
+            } else {
+              value.currentPageNumber = 1;
+            }
+
+            await prov.getLatestMovies(pageNumber: value.currentPageNumber);
+          },
+          child: Text(value.currentPageNumber.toString() +
+              "/" +
+              value.totalLatestPages.toString()),
+        ),
+      ),
       appBar: AppBar(
         title: Text("Latest Movies"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              flex: 1,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Image.network(
-                    "https://images.pexels.com/photos/3921000/pexels-photo-3921000.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    fit: BoxFit.cover,
-                    height: 100,
-                    width: 100,
-                  ),
-                  SizedBox(width: 20),
-                  Image.network(
-                    "https://images.pexels.com/photos/3921000/pexels-photo-3921000.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                    height: 100,
-                    fit: BoxFit.cover,
-                    width: 100,
-                  )
-                ],
-              ),
+      body: FutureBuilder(
+        future: prov.getLatestMovies(pageNumber: 1),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Consumer<MoviesProv>(
+                  builder: ((context, value, child) {
+                    return Expanded(
+                      child: value.latestMovies!.isEmpty
+                          ? const Center(
+                              child: Text("Sonuç Bulunamadı"),
+                            )
+                          : ListView.builder(
+                              itemCount: value.latestMovies?.length,
+                              itemBuilder: (context, index) {
+                                Movie item = value.latestMovies![index];
+                                // print(item.backdrop_path);
+                                return ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(item.posterPath ?? ""),
+                                  ),
+                                  title: Text(item.title),
+                                  subtitle: Text(
+                                      item.overview ?? "overview not found"),
+                                  trailing: Text(item.release_date),
+                                  onTap: () async {
+                                    // Movie details = await prov.getDetails(item.id);
+                                    // return;
+                                    // await prov.getTrailer(
+                                    //   movieId: item.id.toString(),
+                                    // );
+                                    // return;
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) {
+                                        return WorkScreen2(movie: item);
+                                      },
+                                    ));
+                                    // print(details.posterPath ?? "null");
+                                  },
+                                );
+                              },
+                            ),
+                    );
+                  }),
+                ),
+                // ElevatedButton(
+                //   onPressed: () async {
+                //     if (pageNumber < (prov.totalLatestPages as num)) {
+                //       pageNumber++;
+                //     } else {
+                //       pageNumber = 1;
+                //     }
+                //     print(prov.totalLatestPages);
+                //     print(pageNumber);
+
+                //     await prov.getLatestMovies(pageNumber: pageNumber);
+                //   },
+                //   child: Text("Next Page"),
+                // )
+              ],
             ),
-            Consumer<MoviesProv>(
-              builder: ((context, value, child) {
-                return Expanded(
-                  flex: 3,
-                  child: ListView.builder(
-                    itemCount: value.populars?.length,
-                    itemBuilder: (context, index) {
-                      Movie item = value.populars![index];
-                      // print(item.backdrop_path);
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(item.posterPath ?? ""),
-                        ),
-                        title: Text(item.title),
-                        subtitle: Text(item.overview ?? ""),
-                        trailing: Text(item.release_date),
-                        onTap: () async {
-                          // Movie details = await prov.getDetails(item.id);
-                          // return;
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) {
-                              return WorkScreen2(movie: item);
-                            },
-                          ));
-                          // print(details.posterPath ?? "null");
-                        },
-                      );
-                    },
-                  ),
-                );
-              }),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final response = await prov.getPopulars(2);
-                // print(response);
-                // print(url);
-              },
-              child: Text("press"),
-            )
-          ],
-        ),
+          );
+        },
       ),
     );
   }

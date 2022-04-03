@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "380129403126",
+    "project_id": "latestmoviesapp",
+    "storage_bucket": "latestmoviesapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380129403126:android:0b02ce9ac1d136c2340cd7",
+        "android_client_info": {
+          "package_name": "com.example.latest_movies_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380129403126-apnc1qskmdokisupt3qs6v0s6l4sdggv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDedakI-XuKapRj8cLgiy2YZoh-IRl6fdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380129403126-apnc1qskmdokisupt3qs6v0s6l4sdggv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
