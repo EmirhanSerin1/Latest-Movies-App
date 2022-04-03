@@ -19,7 +19,7 @@ class TypeOfMovies extends StatelessWidget {
       builder: ((context, value, child) {
         if (nameOfList == "populars") {
           return SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
+            height: MediaQuery.of(context).size.height / 2.3,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: value.populars!.length,
