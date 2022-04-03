@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SingleFilmItem extends StatelessWidget {
   const SingleFilmItem({
@@ -18,7 +19,14 @@ class SingleFilmItem extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(width: 1, color: Colors.red.withOpacity(0.5)),
           borderRadius: BorderRadius.circular(8),
-          color: Colors.grey.withOpacity(0.2)
+          boxShadow: [
+            BoxShadow(
+              color: Colors.red.withOpacity(0.5),
+              offset: const Offset(0, 3),
+              blurRadius: 3,
+            ),
+          ],
+          color: Colors.grey.shade800,
         ),
         child: InkWell(
           onTap: () => Navigator.of(context)
@@ -46,7 +54,7 @@ class SingleFilmItem extends StatelessWidget {
                             ),
                           ],
                           image: DecorationImage(
-                              image: NetworkImage(imagePath),
+                              image: CachedNetworkImageProvider(imagePath),
                               fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -65,7 +73,7 @@ class SingleFilmItem extends StatelessWidget {
                           children: [
                             Text(
                               name,
-                              style: TextStyle(fontSize: 14),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ],
                         ),
