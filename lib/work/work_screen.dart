@@ -26,11 +26,31 @@ class _WorkScreenState extends State<WorkScreen> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Image.network(url ??
-            //     "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"),
+            Expanded(
+              flex: 1,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Image.network(
+                    "https://images.pexels.com/photos/3921000/pexels-photo-3921000.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                    fit: BoxFit.cover,
+                    height: 100,
+                    width: 100,
+                  ),
+                  SizedBox(width: 20),
+                  Image.network(
+                    "https://images.pexels.com/photos/3921000/pexels-photo-3921000.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                    height: 100,
+                    fit: BoxFit.cover,
+                    width: 100,
+                  )
+                ],
+              ),
+            ),
             Consumer<MoviesProv>(
               builder: ((context, value, child) {
                 return Expanded(
+                  flex: 3,
                   child: ListView.builder(
                     itemCount: value.populars?.length,
                     itemBuilder: (context, index) {

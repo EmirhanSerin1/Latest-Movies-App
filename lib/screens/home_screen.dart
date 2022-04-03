@@ -20,8 +20,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           const HomeAppBar(),
           const Padding(
-            padding:  EdgeInsets.fromLTRB(8, 0, 8, 4),
-            child:  Text(
+            padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+            child: Text(
               "Popular Movies",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
