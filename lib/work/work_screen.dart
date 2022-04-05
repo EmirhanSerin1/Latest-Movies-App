@@ -61,7 +61,7 @@ class _WorkScreenState extends State<WorkScreen> {
             ),
             ElevatedButton(
               onPressed: () async {
-                final response = await prov.getPopulars(2);
+                final response = await prov.getPopulars(pageNumber: 2);
                 // print(response);
                 // print(url);
               },
