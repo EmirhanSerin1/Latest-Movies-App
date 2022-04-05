@@ -26,14 +26,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.dark,
-        debugShowCheckedModeBanner:false,
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // home:const HomeScreen(),
+        home: const HomeScreen(),
 
         // * Providerları burada test ediyorum üsttekini yorumdan çıkart.
-        home: const WorkScreen(),
+        // home: const WorkScreen(),
       ),
     );
   }
