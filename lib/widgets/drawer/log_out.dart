@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:latest_movies_app/widgets/drawer/log_out_alert_dialog.dart';
 
 class LogOut extends StatelessWidget {
-  const LogOut({Key? key}) : super(key: key);
+  const LogOut({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return
-        // ListTile(
-        //   onTap: () {},
-        //   title: Text("Logout"),
-        //   leading: Icon(Icons.logout),
-        // );
-        Padding(
+    return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -22,7 +16,7 @@ class LogOut extends StatelessWidget {
               BoxShadow(
                 blurRadius: 3,
                 color: Colors.red.withOpacity(0.3),
-                offset: const Offset(3, 3),
+                offset:const Offset(3, 3),
               )
             ]),
         height: 50,
@@ -31,8 +25,8 @@ class LogOut extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+             const Padding(
+                padding:  EdgeInsets.all(8.0),
                 child: Text("Log Out"),
               ),
               IconButton(
@@ -40,7 +34,7 @@ class LogOut extends StatelessWidget {
                     showAlertdialog(context);
                     // logout(context);
                   },
-                  icon: const Icon(
+                  icon:const Icon(
                     Icons.power_settings_new,
                     color: Colors.red,
                   )),
@@ -51,7 +45,7 @@ class LogOut extends StatelessWidget {
     );
   }
 
-  // Future<void> logout(BuildContext context) async {
+   // Future<void> logout(BuildContext context) async {
   //   await FirebaseAuth.instance.signOut().then((value) =>
   //       Navigator.pushReplacement(
   //           context, MaterialPageRoute(builder: (context) => LoginScreen())));

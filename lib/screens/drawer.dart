@@ -21,14 +21,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: Drawer(
         child: SafeArea(
           child: ListView(
-            children: const [
-              DrawerTop(),
-              MenuItem(icon: Icons.account_circle, text: "My Account"),
-              // Divider(),
-              MenuItem(icon: Icons.settings, text: "Settings"),
-              Divider(),
-              // Spacer(),
-              LogOut(),
+            children: [
+              Column(
+                children: const [
+                  DrawerTop(),
+                  MenuItem(icon: Icons.account_circle, text: "My Account"),
+                
+                  Divider(),
+                  MenuItem(icon: Icons.settings, text: "Settings"),
+                  LogOut(),
+                ],
+              ),
             ],
           ),
         ),

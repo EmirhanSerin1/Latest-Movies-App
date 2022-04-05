@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/movie.dart';
-import 'package:latest_movies_app/providers/movies_prov.dart';
-import 'package:provider/provider.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class WorkScreen2 extends StatefulWidget {
   final Movie movie;
@@ -24,6 +21,7 @@ class _WorkScreen2State extends State<WorkScreen2> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+<<<<<<< HEAD
               FutureBuilder(
                   future: Provider.of<MoviesProv>(context, listen: false)
                       .getTrailer(movieId: movieItem.id.toString()),
@@ -51,6 +49,8 @@ class _WorkScreen2State extends State<WorkScreen2> {
                       ),
                     );
                   }),
+=======
+>>>>>>> 8b0aa01e46f2698d8bbe492f3886241dfef8f944
               Text("poster image"),
               Image.network(
                 movieItem.posterPath ?? "",

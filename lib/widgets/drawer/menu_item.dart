@@ -13,6 +13,7 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.all(8),
       child: InkWell(
@@ -21,15 +22,14 @@ class MenuItem extends StatelessWidget {
           //     .push(MaterialPageRoute(builder: (context) => widget));
         },
         child: Container(
-          padding: EdgeInsets.fromLTRB(8, 12, 8, 12),
+          padding:const EdgeInsets.fromLTRB(8, 12, 8, 12),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Theme.of(context).primaryColor,
+              color: Colors.black54,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 3,
-                  color:
-                      Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+                  color: Colors.red.withOpacity(0.4),
                   offset: const Offset(0, 0),
                   spreadRadius: 3,
                 )
@@ -38,15 +38,12 @@ class MenuItem extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: Theme.of(context).iconTheme.color,
+                color:const Color(0xFFF3F3F3),
               ),
               const SizedBox(width: 10),
               Text(
                 text,
-                style: TextStyle(
-                  color: Theme.of(context).iconTheme.color,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: const TextStyle(color: Color(0xFFF3F3F3), fontWeight: FontWeight.w500),
               ),
             ],
           ),
