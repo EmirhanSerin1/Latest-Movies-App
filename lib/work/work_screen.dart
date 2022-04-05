@@ -55,7 +55,7 @@ class _WorkScreenState extends State<WorkScreen> {
                     return Expanded(
                       child: value.latestMovies!.isEmpty
                           ? const Center(
-                              child: Text("Sonuç Bulunamadi"),
+                              child: Text("Sonuc Bulunamadi"),
                             )
                           : ListView.builder(
                               itemCount: value.latestMovies?.length,
