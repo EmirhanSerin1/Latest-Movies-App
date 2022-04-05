@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/movie.dart';
+<<<<<<< HEAD
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+=======
+import 'package:provider/provider.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
+import '../providers/movies_prov.dart';
+>>>>>>> 402eb573f2271787dc373bc2f6a84ab9bf91a803
 
 class WorkScreen2 extends StatefulWidget {
   final Movie movie;
