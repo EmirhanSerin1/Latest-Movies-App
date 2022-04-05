@@ -13,16 +13,6 @@ class WorkScreen2 extends StatefulWidget {
 }
 
 class _WorkScreen2State extends State<WorkScreen2> {
-  YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: 'K18cpp_-gP8',
-    params: YoutubePlayerParams(
-      playlist: ['nPt8bK2gbaU', 'gQDByCdjUXw'], // Defining custom playlist
-      startAt: Duration(seconds: 30),
-      showControls: true,
-      showFullscreenButton: true,
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
     Movie movieItem = widget.movie;
@@ -39,29 +29,25 @@ class _WorkScreen2State extends State<WorkScreen2> {
                       .getTrailer(movieId: movieItem.id.toString()),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
-                    print(snapshot.data);
+
                     return Expanded(
-                      child: YoutubePlayerControllerProvider(
-                        // Provides controller to all the widget below it.
-                        controller: _controller,
-                        child: YoutubePlayerIFrame(
-                          controller: YoutubePlayerController(
-                            initialVideoId: 'K18cpp_-gP8',
-                            params: YoutubePlayerParams(
-                              playlist: [
-                                (snapshot.data as String)
-                              ], // Defining custom playlist
-                              // startAt: Duration(seconds: 30),
-                              showControls: true,
-                              showFullscreenButton: true,
-                            ),
+                      child: YoutubePlayerIFrame(
+                        controller: YoutubePlayerController(
+                          initialVideoId: 'K18cpp_-gP8',
+                          params: YoutubePlayerParams(
+                            playlist: [
+                              (snapshot.data as String)
+                            ], // Defining custom playlist
+                            // startAt: Duration(seconds: 30),
+                            showControls: true,
+                            showFullscreenButton: true,
                           ),
-                          aspectRatio: 16 / 9,
                         ),
+                        aspectRatio: 16 / 9,
                       ),
                     );
                   }),

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         // home:const HomeScreen(),
 
         // * Providerları burada test ediyorum üsttekini yorumdan çıkart.
-        home: const HomeScreen(),
+        home: const WorkScreen(),
       ),
     );
   }
