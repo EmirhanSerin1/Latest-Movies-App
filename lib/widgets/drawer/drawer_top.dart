@@ -20,43 +20,10 @@ class DrawerTop extends StatelessWidget {
           accountEmail: Text("bessie.webb@example.com"),
           currentAccountPicture: CircleAvatar(
             backgroundImage: NetworkImage(
-                "https://randomuser.me/api/portraits/women/40.jpg"),
+              "https://randomuser.me/api/portraits/women/40.jpg",
+            ),
           ),
         ),
-
-        // SizedBox(
-        //   child: Row(
-        //     children: [
-        //       const Padding(
-        //         padding: EdgeInsets.all(8.0),
-        //         child: BuildProfilPhoto(75, 75),
-        //       ),
-        //      const SizedBox(width: 10),
-        //       Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           //fullname
-        //           SizedBox(
-        //             width: MediaQuery.of(context).size.width * 0.5,
-        //             child:const Text(
-        //               "Name",
-        //               style: TextStyle(fontWeight: FontWeight.w500),
-        //             ),
-        //           ),
-        //           //email,
-        //           SizedBox(
-        //             width: MediaQuery.of(context).size.width * 0.5,
-        //             child:const Text(
-        //               "email",
-        //               style: TextStyle(color: Colors.grey, fontSize: 13),
-        //             ),
-        //           ),
-        //         ],
-        //       )
-        //     ],
-        //   ),
-        // ),
-        // const SizedBox(height: 50),
       ],
     );
   }
