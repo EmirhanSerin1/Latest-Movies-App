@@ -69,7 +69,7 @@ class _WorkScreenState extends State<WorkScreen> {
                                   ),
                                   title: Text(item.title),
                                   subtitle: Text(
-                                      item.overview ?? "overview not found"),
+                                      item.overview ?? "Overview not found"),
                                   trailing: Text(item.release_date),
                                   onTap: () async {
                                     // Movie details = await prov.getDetails(item.id);
