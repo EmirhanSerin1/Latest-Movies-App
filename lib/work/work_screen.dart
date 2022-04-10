@@ -22,25 +22,29 @@ class _WorkScreenState extends State<WorkScreen> {
       floatingActionButton: Consumer<MoviesProv>(
         builder: (context, value, child) => FloatingActionButton(
           onPressed: () async {
-            value.currentPageNumber;
-            if (value.currentPageNumber < (prov.totalLatestPages as num)) {
-              value.currentPageNumber++;
+            value.currentRecommendedPages;
+            if (value.currentRecommendedPages <
+                (prov.totalRecommendedPages as num)) {
+              value.currentRecommendedPages++;
             } else {
-              value.currentPageNumber = 1;
+              value.currentRecommendedPages = 1;
             }
 
-            await prov.getLatestMovies(pageNumber: value.currentPageNumber);
+            await prov.getRecommendeds(
+              movieId: "100",
+              pageNumber: value.currentRecommendedPages,
+            );
           },
-          child: Text(value.currentPageNumber.toString() +
+          child: Text(value.currentRecommendedPages.toString() +
               "/" +
-              value.totalLatestPages.toString()),
+              value.totalRecommendedPages.toString()),
         ),
       ),
       appBar: AppBar(
         title: Text("Latest Movies"),
       ),
       body: FutureBuilder(
-        future: prov.getLatestMovies(pageNumber: 1),
+        future: prov.getRecommendeds(movieId: "100", pageNumber: 1),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -53,14 +57,14 @@ class _WorkScreenState extends State<WorkScreen> {
                 Consumer<MoviesProv>(
                   builder: ((context, value, child) {
                     return Expanded(
-                      child: value.latestMovies!.isEmpty
+                      child: value.recommendeds!.isEmpty
                           ? const Center(
-                              child: Text("Sonuc Bulunmadi"),
+                              child: Text("Sonuç Bulunamadi"),
                             )
                           : ListView.builder(
-                              itemCount: value.latestMovies?.length,
+                              itemCount: value.recommendeds?.length,
                               itemBuilder: (context, index) {
-                                Movie item = value.latestMovies![index];
+                                Movie item = value.recommendeds![index];
                                 // print(item.backdrop_path);
                                 return ListTile(
                                   leading: CircleAvatar(
