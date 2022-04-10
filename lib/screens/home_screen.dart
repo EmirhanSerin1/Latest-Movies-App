@@ -19,11 +19,13 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawer: const CustomDrawer(),
       body: ListView(
-        children: const [
+        children:  [
           HomeAppBar(),
           MoviesTitle(title: "Popular Movies"),
           TypeOfMovies(nameOfList: "populars"),
-          //   )
+          MoviesTitle(title: "Latest Movies"),
+          TypeOfMovies(nameOfList: "latest"),
+          Container(height: 500,),
         ],
       ),
     );

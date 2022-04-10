@@ -6,7 +6,7 @@ import '../../models/movie.dart';
 import '../../providers/movies_prov.dart';
 import '../../work/work_screen_2.dart';
 
-class TypeOfMovies extends StatelessWidget {
+class TypeOfMovies extends StatefulWidget {
   const TypeOfMovies({
     Key? key,
     required this.nameOfList,
@@ -14,12 +14,31 @@ class TypeOfMovies extends StatelessWidget {
   final String nameOfList;
 
   @override
+  State<TypeOfMovies> createState() => _TypeOfMoviesState();
+}
+
+class _TypeOfMoviesState extends State<TypeOfMovies> {
+  PageController pageController = PageController();
+  double pageOffSet = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(viewportFraction: 0.7);
+    pageController.addListener(() {
+      setState(() {
+        pageOffSet = pageController.page!;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<MoviesProv>(
       builder: ((context, value, child) {
-        if (nameOfList == "populars") {
+        if (widget.nameOfList == "popular") {
           return SizedBox(
-            height: MediaQuery.of(context).size.height / 2.3,
+            height: 250,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: value.populars!.length,
@@ -28,27 +47,46 @@ class TypeOfMovies extends StatelessWidget {
                 // print(item.backdrop_path);
 
                 return SingleFilmItem(
-                    widget: WorkScreen2(movie: item),
-                    name: item.title,
-                    imagePath: item.posterPath ?? "");
-              },
+                  alignment: Alignment(-pageOffSet.abs()+index,0),
+                  widget: WorkScreen2(movie: item),
+                  name: item.title,
+                  imagePath: item.posterPath ?? "",
+                );
+              },  
             ),
           );
         } else {
           return SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+            height: 250,
+            child: PageView.builder(
               itemCount: value.populars!.length,
+              controller: pageController,
               itemBuilder: (context, index) {
                 Movie item = value.populars![index];
-                // print(item.backdrop_path);
-                return SingleFilmItem(
+                return Transform.scale(
+                  scale: 1,
+                  child: SingleFilmItem(
+                    alignment: Alignment(0,-pageOffSet.abs()+index),
                     widget: WorkScreen2(movie: item),
                     name: item.title,
-                    imagePath: item.posterPath ?? "");
+                    imagePath: item.posterPath ?? "",
+                  ),
+                );
               },
             ),
+
+            //ListView.builder(
+            //   scrollDirection: Axis.horizontal,
+            //   itemCount: value.populars!.length,
+            //   itemBuilder: (context, index) {
+            //     Movie item = value.populars![index];
+            //     // print(item.backdrop_path);
+            //     return SingleFilmItem(
+            //         widget: WorkScreen2(movie: item),
+            //         name: item.title,
+            //         imagePath: item.posterPath ?? "");
+            //   },
+            // ),
           );
         }
       }),
