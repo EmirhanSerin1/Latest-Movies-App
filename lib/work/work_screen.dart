@@ -59,7 +59,7 @@ class _WorkScreenState extends State<WorkScreen> {
                     return Expanded(
                       child: value.recommendeds!.isEmpty
                           ? const Center(
-                              child: Text("Sonuç Bulunamadi"),
+                              child: Text("We could not find result"),
                             )
                           : ListView.builder(
                               itemCount: value.recommendeds?.length,
