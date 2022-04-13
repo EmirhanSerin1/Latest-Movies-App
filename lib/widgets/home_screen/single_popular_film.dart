@@ -7,12 +7,10 @@ class SingleFilmItem extends StatefulWidget {
     required this.widget,
     required this.name,
     required this.imagePath,
-    required this.alignment,
   }) : super(key: key);
 
   final String name, imagePath;
   final Widget widget;
-  final Alignment alignment;
   @override
   State<SingleFilmItem> createState() => _SingleFilmItemState();
 }
@@ -58,7 +56,6 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
                         //   ),
                         // ],
                         image: DecorationImage(
-                          alignment: widget.alignment,
                             image: CachedNetworkImageProvider(widget.imagePath),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(8),
@@ -68,7 +65,7 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
                       bottom: 10,
                       left: 10,
                       child: Container(
-                        width: MediaQuery.of(context).size.width /2.6,
+                        width: MediaQuery.of(context).size.width / 2.6,
                         alignment: Alignment.centerLeft,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +73,8 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
                           children: [
                             Text(
                               widget.name,
-                              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),

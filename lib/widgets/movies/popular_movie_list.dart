@@ -30,7 +30,6 @@ class PopularMoviesList extends StatelessWidget {
                   return Transform.scale(
                     scale: 1,
                     child: SingleFilmItem(
-                      alignment: Alignment(0, -pageOffSet.abs() + index),
                       widget: WorkScreen2(movie: item),
                       name: item.title,
                       imagePath: item.posterPath ?? "",

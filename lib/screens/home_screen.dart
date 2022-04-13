@@ -4,10 +4,8 @@ import 'package:latest_movies_app/widgets/movies/popular_movie_list.dart';
 import 'package:latest_movies_app/widgets/movies/recommended_movies_list.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/movies_prov.dart';
 import '../widgets/home_screen/home_app_bar.dart';
 import '../widgets/home_screen/movies_title.dart';
-import '../widgets/home_screen/single_movie_controller.dart';
 import 'drawer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,8 +13,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MoviesProv prov = Provider.of<MoviesProv>(context, listen: false);
-    // For taking datas
 
     return Scaffold(
       drawer: const CustomDrawer(),
@@ -29,9 +25,7 @@ class HomeScreen extends StatelessWidget {
           LatestMoviesList(),
           MoviesTitle(title: "Recommendeds"),
           RecommendedMoviesList()
-          // TypeOfMovies(nameOfList: "populars"),
-          // TypeOfMovies(nameOfList: "latest"),
-          // SizedBox(height: 500),
+          
         ],
       ),
     );

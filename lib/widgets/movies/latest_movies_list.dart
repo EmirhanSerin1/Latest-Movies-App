@@ -26,7 +26,6 @@ class LatestMoviesList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Movie item = value.latestMovies![index];
                   return SingleFilmItem(
-                    alignment: Alignment(-pageOffSet.abs() + index, 0),
                     widget: WorkScreen2(movie: item),
                     name: item.title,
                     imagePath: item.posterPath ?? "",
