@@ -11,7 +11,6 @@ class RecommendedMoviesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double pageOffSet = 0;
     MoviesProv prov = Provider.of<MoviesProv>(context, listen: false);
 
     return FutureBuilder(

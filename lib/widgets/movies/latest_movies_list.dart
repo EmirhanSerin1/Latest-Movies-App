@@ -11,10 +11,10 @@ class LatestMoviesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double pageOffSet = 0;
+    MoviesProv prov = Provider.of<MoviesProv>(context, listen: false);
 
     return FutureBuilder(
-      future: Provider.of<MoviesProv>(context, listen: false).getLatestMovies(),
+      future: prov.getLatestMovies(),
       builder: (context, snapshot) {
         return Consumer<MoviesProv>(
           builder: (context, value, child) {
