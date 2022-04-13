@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/widgets/movies/latest_movies_list.dart';
+import 'package:latest_movies_app/widgets/movies/popular_movie_list.dart';
+import 'package:latest_movies_app/widgets/movies/recommended_movies_list.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/movies_prov.dart';
@@ -14,7 +17,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     MoviesProv prov = Provider.of<MoviesProv>(context, listen: false);
     // For taking datas
-    callProv(prov);
 
     return Scaffold(
       drawer: const CustomDrawer(),
@@ -22,16 +24,16 @@ class HomeScreen extends StatelessWidget {
         children: const [
           HomeAppBar(),
           MoviesTitle(title: "Popular Movies"),
-          TypeOfMovies(nameOfList: "populars"),
-          //   )
+          PopularMoviesList(),
+          MoviesTitle(title: "Latest Movies"),
+          LatestMoviesList(),
+          MoviesTitle(title: "Recommendeds"),
+          RecommendedMoviesList()
+          // TypeOfMovies(nameOfList: "populars"),
+          // TypeOfMovies(nameOfList: "latest"),
+          // SizedBox(height: 500),
         ],
       ),
     );
-  }
-
-  // We could call in initState. I did like this just for now. If I will delete this. Apps not calling apis.
-  void callProv(MoviesProv prov) async {
-    final response = await prov.getPopulars(pageNumber: 2);
-    // debugPrint(response);
   }
 }

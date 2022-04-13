@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:latest_movies_app/models/movie.dart';
+import '../models/functions_enum.dart';
 
 class MoviesProv extends ChangeNotifier {
   final dio = Dio();
@@ -45,6 +47,7 @@ class MoviesProv extends ChangeNotifier {
   List<Movie>? topRateds = [];
   List<Movie>? searchResults = [];
   List<Movie>? similarMovies = [];
+  List<Movie>? latestMovies = [];
 
   int? totalRecommendedPages = 1;
   int? totalPopularPages = 1;
@@ -52,8 +55,15 @@ class MoviesProv extends ChangeNotifier {
   int? totalTopRatedPages = 1;
   int? totalSearchPages = 1;
   int? totalSimilarMoviePages = 1;
+  int? totalLatestPages = 1;
 
-  int currentPageNumber = 1;
+  int currentRecommendedPages = 1;
+  int currentPopularPages = 1;
+  int currentUpcomingPages = 1;
+  int currentTopRatedPages = 1;
+  int currentSearchPages = 1;
+  int currentSimilarMoviePages = 1;
+  int currentLatestPages = 1;
 
   List<Movie> mapResultsToMovie(List results) {
     List<Movie> movies = results
@@ -97,7 +107,10 @@ class MoviesProv extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getRecommendeds({int pageNumber = 1}) async {
+  Future<void> getRecommendeds(
+      {required String movieId, int pageNumber = 1}) async {
+    String recommendationUrl =
+        "https://api.themoviedb.org/3/movie/$movieId/recommendations?api_key=9240023865dd052e90b0564d9b5f6179&language=en-US&page=";
     Response<Map> response =
         await dio.get(recommendationUrl + pageNumber.toString());
     List results = response.data!["results"];
@@ -134,9 +147,6 @@ class MoviesProv extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  List<Movie>? latestMovies = [];
-  int? totalLatestPages = 1;
 
   Future<void> getLatestMovies({int pageNumber = 1}) async {
     print("worked");
@@ -197,5 +207,14 @@ class MoviesProv extends ChangeNotifier {
     }
 
     // return print(youtube_url + results[0]["key"]);
+  }
+
+  Future<void> functionWorker(dynamic function, {int pageNumber = 1}) async {
+    if (function == moviesFunctions.populars) {
+      await getPopulars(pageNumber: pageNumber);
+    } else if (function == moviesFunctions.latests) {
+      await getLatestMovies(pageNumber: pageNumber);
+    }
+    notifyListeners();
   }
 }
