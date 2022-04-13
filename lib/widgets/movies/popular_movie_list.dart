@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/screens/movie_details.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/movie.dart';
@@ -29,7 +30,7 @@ class PopularMoviesList extends StatelessWidget {
                   return Transform.scale(
                     scale: 1,
                     child: SingleFilmItem(
-                      widget: WorkScreen2(movie: item),
+                      widget: MovieDetails(movie: item),
                       name: item.title,
                       imagePath: item.posterPath ?? "",
                     ),

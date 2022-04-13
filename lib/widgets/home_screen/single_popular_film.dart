@@ -40,7 +40,6 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
             padding: const EdgeInsets.all(0.0),
             child: Container(
                 width: MediaQuery.of(context).size.width / 2.5,
-                height: MediaQuery.of(context).size.height / 150,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                 ),
