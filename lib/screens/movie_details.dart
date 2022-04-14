@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
+import 'package:latest_movies_app/widgets/movie_details/detail_body.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -20,99 +21,9 @@ class _MovieDetailsState extends State<MovieDetails> {
     return Scaffold(
       body: Stack(
         children: [
-          ListView(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: 230,
-                child: Image.network(
-                  movieItem.backdrop_path ?? "",
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(160, 8, 8, 8),
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        movieItem.title,
-                        style: const TextStyle(fontSize: 22),
-                      ),
-                      Text(
-                        movieItem.adult ? "Adult" : "Everyone",
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(2)),
-                        child: Text(
-                          movieItem.vote_average.toString(),
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      ),
-                      Text(
-                        movieItem.release_date
-                            .substring(0, movieItem.release_date.length - 6),
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 55, 8, 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  const  Text(
-                        "OverView",
-                        style:  TextStyle(fontSize: 20),
-                      ),
-                    const  SizedBox(height: 4),
-                    Text(movieItem.overview.toString()),
-                  ],
-                ),
-              )
-            ],
-          ),
-          Positioned(
-            top: 40,
-            left: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(32),
-                color: const Color.fromARGB(255, 73, 71, 71).withOpacity(0.6),
-              ),
-              padding: const EdgeInsets.all(5),
-              child: InkWell(
-                  onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.arrow_back)),
-            ),
-          ),
-          Positioned(
-            top: 195,
-            left: 20,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 3,
-                    color: Colors.grey.withOpacity(0.1),
-                    offset: const Offset(3, 3),
-                  ),
-                ],
-              ),
-              width: 124,
-              height: 200,
-              child: Image.network(
-                movieItem.posterPath ?? "",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          DetailsBody(movieItem: movieItem),
+          const PopIcon(),
+          PosterImage(movieItem: movieItem),
         ],
       ),
       // body: ListView(
@@ -163,6 +74,64 @@ class _MovieDetailsState extends State<MovieDetails> {
       //     Text(movieItem.overview.toString()),
       //   ],
       // ),
+    );
+  }
+}
+
+class PosterImage extends StatelessWidget {
+  const PosterImage({
+    Key? key,
+    required this.movieItem,
+  }) : super(key: key);
+
+  final Movie movieItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 195,
+      left: 20,
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 3,
+              color: Colors.grey.withOpacity(0.1),
+              offset: const Offset(3, 3),
+            ),
+          ],
+        ),
+        width: 124,
+        height: 200,
+        child: Image.network(
+          movieItem.posterPath ?? "",
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+class PopIcon extends StatelessWidget {
+  const PopIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 40,
+      left: 10,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(32),
+          color: const Color.fromARGB(255, 73, 71, 71).withOpacity(0.6),
+        ),
+        padding: const EdgeInsets.all(5),
+        child: InkWell(
+            onTap: () => Navigator.pop(context),
+            child: const Icon(Icons.arrow_back)),
+      ),
     );
   }
 }
