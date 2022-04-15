@@ -36,51 +36,40 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
         child: InkWell(
           onTap: () => Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => widget.widget)),
-          child: Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Container(
-                width: MediaQuery.of(context).size.width / 2.5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+          child: Container(
+            width: MediaQuery.of(context).size.width / 2.5,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(
+                  widget.imagePath,
                 ),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.red.withOpacity(0.5),
-                        //     offset: const Offset(1, 3),
-                        //     blurRadius: 3,
-                        //   ),
-                        // ],
-                        image: DecorationImage(
-                            image: CachedNetworkImageProvider(widget.imagePath),
-                            fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      left: 10,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2.6,
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.name,
-                              style: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 10,
+                  left: 10,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2.6,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.name,
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                )),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

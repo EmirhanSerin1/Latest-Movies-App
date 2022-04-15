@@ -26,14 +26,10 @@ class RecommendedMoviesList extends StatelessWidget {
                 itemCount: value.recommendeds!.length,
                 itemBuilder: (context, index) {
                   Movie item = value.recommendeds![index];
-
-                  return Transform.scale(
-                    scale: 1,
-                    child: SingleFilmItem(
-                      widget: MovieDetails(movie: item),
-                      name: item.title,
-                      imagePath: item.posterPath ?? "",
-                    ),
+                  return SingleFilmItem(
+                    widget: MovieDetails(movie: item),
+                    name: item.title,
+                    imagePath: item.posterPath ?? "",
                   );
                 },
               ),
