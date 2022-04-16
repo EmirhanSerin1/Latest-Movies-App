@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/widgets/movie_details/imdb_rate.dart';
 import 'package:latest_movies_app/core/components/custom_text.dart';
-import 'package:latest_movies_app/core/constants/paddings/padding_movie_details.dart';
+import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 
 class PosterImageAndOtherInfos extends StatelessWidget {
   const PosterImageAndOtherInfos({
@@ -14,7 +14,7 @@ class PosterImageAndOtherInfos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const paddingGeneralH = PaddingMovieDetails.padding;
+    const paddingGeneralH = PaddingMovieDetails.generalPadding;
 
     return Positioned(
       top: 165,

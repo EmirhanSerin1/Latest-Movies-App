@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/core/constants/colors/colors_movie_details.dart';
+import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 
 class PopIcon extends StatelessWidget {
   const PopIcon({
@@ -13,9 +15,9 @@ class PopIcon extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
-          color: const Color.fromARGB(255, 73, 71, 71).withOpacity(0.6),
+          color: ColorsMovieDetails.popButtonColor,
         ),
-        padding: const EdgeInsets.all(5),
+        padding: PaddingMovieDetails.popButtonPadding,
         child: InkWell(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back)),

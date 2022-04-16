@@ -131,7 +131,7 @@ class MoviesProv extends ChangeNotifier {
     } else {
       upcomings = mapResultsToMovie(results);
       totalUpcomingPages = response.data!["total_pages"];
-      print("Video : " + upcomings![0].video.toString());
+      // print("Video : " + upcomings![0].video.toString());
     }
     notifyListeners();
   }
@@ -149,7 +149,7 @@ class MoviesProv extends ChangeNotifier {
   }
 
   Future<void> getLatestMovies({int pageNumber = 1}) async {
-    print("worked");
+    // print("worked");
     Response<Map> response = await dio.get(latestUrl + pageNumber.toString());
     List results = response.data!["results"];
     if (results.isEmpty) {
@@ -201,7 +201,7 @@ class MoviesProv extends ChangeNotifier {
     if (results.isEmpty) {
       return null;
     } else {
-      print(results);
+      // print(results);
       String youtubeTrailer = results[0]["key"];
       return youtubeTrailer;
     }

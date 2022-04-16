@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/core/constants/paddings/padding_movie_details.dart';
+import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 
 class OverView extends StatelessWidget {
   const OverView({Key? key, required this.text}) : super(key: key);
@@ -8,7 +8,7 @@ class OverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: PaddingMovieDetails.padding,
+      padding: PaddingMovieDetails.generalPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

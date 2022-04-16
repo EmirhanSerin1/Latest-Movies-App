@@ -22,15 +22,7 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
       padding: const EdgeInsets.all(4.0),
       child: Container(
         decoration: BoxDecoration(
-          // border: Border.all(width: 1, color: Colors.red.withOpacity(0.5)),
           borderRadius: BorderRadius.circular(8),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.red.withOpacity(0.5),
-          //     offset: const Offset(0, 3),
-          //     blurRadius: 3,
-          //   ),
-          // ],
           color: Colors.grey.shade800,
         ),
         child: InkWell(
