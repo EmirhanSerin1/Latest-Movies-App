@@ -30,7 +30,7 @@ class MovieList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Movie item = getItem(value, index);
                   return SingleFilmItem(
-                    widget: MovieDetails(movie: item),
+                    widget: MovieDetails(movie: item, contextForPalet: context),
                     name: item.title,
                     imagePath: item.posterPath ?? "",
                   );

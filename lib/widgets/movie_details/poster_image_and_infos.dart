@@ -66,17 +66,9 @@ class PosterImageAndOtherInfos extends StatelessWidget {
     );
   }
 
-  Container posterImage() {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 3,
-            color: Colors.grey.withOpacity(0.1),
-            offset: const Offset(3, 3),
-          ),
-        ],
-      ),
+  SizedBox posterImage() {
+    return SizedBox(
+    
       width: 124,
       height: 200,
       child: Image.network(

@@ -33,7 +33,7 @@ class ImdbRate extends StatelessWidget {
               border: Border.all(width: 1, color: Colors.grey),
               borderRadius: BorderRadius.circular(2)),
           child: CustomText(
-            text: movieItem.vote_average.toString() == "0" ? "n/a" : movieItem.vote_average.toString(),
+            text: movieItem.vote_average.toString() == "0" ? "n/a" : movieItem.vote_average.toString().substring(0, 3),
             textStyle: Theme.of(context).textTheme.caption?.copyWith(color: Colors.white),
           ),
         ),
