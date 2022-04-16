@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/widgets/movies/latest_movies_list.dart';
-import 'package:latest_movies_app/widgets/movies/popular_movie_list.dart';
-import 'package:latest_movies_app/widgets/movies/recommended_movies_list.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/home_screen/home_app_bar.dart';
+import '../widgets/home_screen/movie_list.dart';
 import '../widgets/home_screen/movies_title.dart';
 import 'drawer.dart';
 
@@ -20,11 +17,14 @@ class HomeScreen extends StatelessWidget {
         children: const [
           HomeAppBar(),
           MoviesTitle(title: "Popular Movies"),
-          PopularMoviesList(),
-          MoviesTitle(title: "Latest Movies"),
-          LatestMoviesList(),
+          MovieList(typeOfMovie: "populars"),
+
           MoviesTitle(title: "Recommendeds"),
-          RecommendedMoviesList()
+          MovieList(typeOfMovie: "recommended"),
+          
+          MoviesTitle(title: "Latest Movies"),
+          MovieList(typeOfMovie: "latest"),
+          
           
         ],
       ),

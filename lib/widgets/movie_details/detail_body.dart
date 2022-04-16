@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/models/movie.dart';
-import 'package:latest_movies_app/screens/movie_details.dart';
-import 'package:latest_movies_app/widgets/movie_details/background.dart';
-import 'package:latest_movies_app/widgets/movie_details/overview.dart';
-import 'package:latest_movies_app/widgets/movie_details/pop_icon.dart';
-import 'package:latest_movies_app/widgets/movie_details/poster_image_and_infos.dart';
+
+import '../../models/movie.dart';
+import 'background.dart';
+import 'overview.dart';
+import 'pop_icon.dart';
+import 'poster_image_and_infos.dart';
 
 class DetailsBody extends StatelessWidget {
   const DetailsBody({Key? key, required this.movieItem}) : super(key: key);
@@ -15,7 +15,7 @@ class DetailsBody extends StatelessWidget {
       children: [
         SizedBox(
           width: double.infinity,
-          height: 395,
+          height: 400,
           child: Stack(
             children: [
               BackgroundImage(movieItem: movieItem),
@@ -24,7 +24,7 @@ class DetailsBody extends StatelessWidget {
             ],
           ),
         ),
-        // * 3 will delete
+        // * 3 have to deleted
         OverView(text: movieItem.overview.toString() * 3)
       ],
     );

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/models/movie.dart';
-import 'package:latest_movies_app/providers/movies_prov.dart';
-import 'package:latest_movies_app/widgets/movie_details/detail_body.dart';
-import 'package:provider/provider.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
+import '../models/movie.dart';
+import '../widgets/movie_details/detail_body.dart';
 
 class MovieDetails extends StatefulWidget {
   final Movie movie;
