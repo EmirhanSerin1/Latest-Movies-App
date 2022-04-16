@@ -10,6 +10,7 @@ class DrawerTop extends StatelessWidget {
       children: const [
         UserAccountsDrawerHeader(
           decoration: BoxDecoration(
+            
               image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(

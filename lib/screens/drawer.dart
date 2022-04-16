@@ -16,7 +16,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 300),
       width: MediaQuery.of(context).size.width * 0.85,
       child: Drawer(
         child: SafeArea(
