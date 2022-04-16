@@ -33,7 +33,9 @@ class ImdbRate extends StatelessWidget {
         child: CustomText(
           text: voteAverage == "0"
               ? "n/a"
-              : voteAverage.substring(0, 3),
+              : voteAverage.length < 3
+                  ? voteAverage
+                  : voteAverage.substring(0, 3),
           textStyle: Theme.of(context)
               .textTheme
               .caption

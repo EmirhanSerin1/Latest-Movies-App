@@ -14,18 +14,17 @@ class MovieList extends StatelessWidget {
   Widget build(BuildContext context) {
     MoviesProv prov = Provider.of<MoviesProv>(context, listen: false);
 
-    
-    
     return FutureBuilder(
       future: getFuture(prov),
       builder: (context, snapshot) {
         return Consumer<MoviesProv>(
           builder: (context, value, child) {
+            List<Movie>? itemList = getItemList(value);
             return SizedBox(
               height: 250,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: getItemCount(value),
+                itemCount: itemList!.length,
                 itemBuilder: (context, index) {
                   Movie item = getItem(value, index);
                   return SingleFilmItem(
@@ -38,6 +37,9 @@ class MovieList extends StatelessWidget {
                     releaseDate: item.release_date,
                     voteAverage: item.vote_average.toString(),
                     voteCount: item.vote_count.toString(),
+                    movieList: itemList,
+                    value: value,
+                    typeOfList: typeOfMovie,
                   );
                 },
               ),
@@ -60,15 +62,15 @@ class MovieList extends StatelessWidget {
     }
   }
 
-  int? getItemCount(MoviesProv value) {
+   getItemList(MoviesProv value) {
     if(typeOfMovie == "populars"){
-      return value.populars!.length;
+      return value.populars;
     }else if(typeOfMovie == "recommended"){
-      return value.recommendeds!.length;
+      return value.recommendeds;
     }else if(typeOfMovie == "latest") {
-      return value.latestMovies!.length;
+      return value.latestMovies;
     }else{
-      return value.populars!.length;
+      return value.populars;
     }
   }
 

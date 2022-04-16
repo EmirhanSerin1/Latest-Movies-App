@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/models/movie.dart';
+import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/widgets/movie_details/background.dart';
 import 'package:latest_movies_app/widgets/movie_details/details_body_box_dec.dart';
 import 'package:latest_movies_app/widgets/movie_details/overview.dart';
@@ -7,20 +9,22 @@ import 'package:latest_movies_app/widgets/movie_details/poster_image_and_infos.d
 import 'package:latest_movies_app/widgets/movie_details/trailer.dart';
 import 'package:palette_generator/palette_generator.dart';
 
-
 class MovieDetails extends StatefulWidget {
-  const MovieDetails(
-      {Key? key,
-      required this.contextForPalet,
-      required this.overview,
-      required this.imagePath,
-      required this.name,
-      required this.backgroungPath,
-      required this.voteCount,
-      required this.voteAverage,
-      required this.releaseDate,
-      required this.id})
-      : super(key: key);
+  const MovieDetails({
+    Key? key,
+    required this.contextForPalet,
+    required this.overview,
+    required this.imagePath,
+    required this.name,
+    required this.backgroungPath,
+    required this.voteCount,
+    required this.voteAverage,
+    required this.releaseDate,
+    required this.movieList,
+    required this.value,
+    required this.id,
+    required this.typeOfList,
+  }) : super(key: key);
   final BuildContext contextForPalet;
   final String overview,
       imagePath,
@@ -29,7 +33,9 @@ class MovieDetails extends StatefulWidget {
       voteCount,
       voteAverage,
       releaseDate,
-      id;
+      id, typeOfList;
+  final List<Movie>? movieList;
+  final MoviesProv value;
 
   @override
   State<MovieDetails> createState() => _MovieDetailsState();
@@ -87,6 +93,9 @@ class _MovieDetailsState extends State<MovieDetails> {
                       releaseDate: widget.releaseDate,
                       voteAverage: widget.voteAverage,
                       voteCount: widget.voteCount,
+                      movieList: widget.movieList,
+                      value: widget.value,
+                      typeOfList: widget.typeOfList,
                     ),
                   ],
                 ),
