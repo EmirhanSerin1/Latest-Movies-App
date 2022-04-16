@@ -10,11 +10,28 @@ import 'package:palette_generator/palette_generator.dart';
 import '../models/movie.dart';
 
 class MovieDetails extends StatefulWidget {
-  final Movie movie;
   const MovieDetails(
-      {Key? key, required this.movie, required this.contextForPalet})
+      {Key? key,
+      required this.contextForPalet,
+      required this.overview,
+      required this.imagePath,
+      required this.name,
+      required this.backgroungPath,
+      required this.voteCount,
+      required this.voteAverage,
+      required this.releaseDate,
+      required this.id})
       : super(key: key);
   final BuildContext contextForPalet;
+  final String overview,
+      imagePath,
+      name,
+      backgroungPath,
+      voteCount,
+      voteAverage,
+      releaseDate,
+      id;
+
   @override
   State<MovieDetails> createState() => _MovieDetailsState();
 }
@@ -36,8 +53,7 @@ class _MovieDetailsState extends State<MovieDetails> {
 
     final PaletteGenerator paletteGenerator =
         await PaletteGenerator.fromImageProvider(
-            NetworkImage(
-                widget.movie.backdrop_path ?? "assets/flutter_dark.png"),
+            NetworkImage(widget.backgroungPath),
             size: Size(width, width * 5 / 9));
 
     dominant =
@@ -49,8 +65,7 @@ class _MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    Movie movieItem = widget.movie;
-
+    print(widget.name + "1");
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -65,14 +80,21 @@ class _MovieDetailsState extends State<MovieDetails> {
                 height: 400,
                 child: Stack(
                   children: [
-                    BackgroundImage(movieItem: movieItem),
+                    BackgroundImage(path: widget.backgroungPath),
                     const PopIcon(),
-                    PosterImageAndOtherInfos(movieItem: movieItem),
+                    PosterImageAndOtherInfos(
+                      tag: widget.name,
+                      name: widget.name,
+                      posterPath: widget.imagePath,
+                      releaseDate: widget.releaseDate,
+                      voteAverage: widget.voteAverage,
+                      voteCount: widget.voteCount,
+                    ),
                   ],
                 ),
               ),
-              OverView(text: movieItem.overview.toString()),
-              Trailer(movieItem: movieItem),
+              OverView(text: widget.overview),
+              Trailer(id: widget.id),
             ],
           ),
         ),

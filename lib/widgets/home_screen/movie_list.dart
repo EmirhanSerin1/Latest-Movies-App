@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../models/movie.dart';
 import '../../providers/movies_prov.dart';
 import '../../screens/movie_details.dart';
-import '../home_screen/single_popular_film.dart';
+import 'single_film.dart';
 
 class MovieList extends StatelessWidget {
   const MovieList({Key? key, required this.typeOfMovie}) : super(key: key);
@@ -30,9 +30,15 @@ class MovieList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Movie item = getItem(value, index);
                   return SingleFilmItem(
-                    widget: MovieDetails(movie: item, contextForPalet: context),
+                    overview: item.overview ?? "",
+                    backgroungPath: item.backdrop_path ?? "",
                     name: item.title,
                     imagePath: item.posterPath ?? "",
+                    heroTag: item.title,
+                    id: item.id.toString(),
+                    releaseDate: item.release_date,
+                    voteAverage: item.vote_average.toString(),
+                    voteCount: item.vote_count.toString(),
                   );
                 },
               ),

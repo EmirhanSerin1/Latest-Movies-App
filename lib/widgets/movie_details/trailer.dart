@@ -10,16 +10,16 @@ import '../../providers/movies_prov.dart';
 class Trailer extends StatelessWidget {
   const Trailer({
     Key? key,
-    required this.movieItem,
+    required this.id,
   }) : super(key: key);
 
-  final Movie movieItem;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Provider.of<MoviesProv>(context, listen: false)
-          .getTrailer(movieId: movieItem.id.toString()),
+          .getTrailer(movieId: id),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(
