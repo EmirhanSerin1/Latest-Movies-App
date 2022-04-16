@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../models/movie.dart';
 import '../../providers/movies_prov.dart';
-import '../../screens/movie_details.dart';
 import 'single_film.dart';
 
 class MovieList extends StatelessWidget {

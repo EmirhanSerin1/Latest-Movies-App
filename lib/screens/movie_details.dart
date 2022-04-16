@@ -7,7 +7,6 @@ import 'package:latest_movies_app/widgets/movie_details/poster_image_and_infos.d
 import 'package:latest_movies_app/widgets/movie_details/trailer.dart';
 import 'package:palette_generator/palette_generator.dart';
 
-import '../models/movie.dart';
 
 class MovieDetails extends StatefulWidget {
   const MovieDetails(
@@ -65,7 +64,6 @@ class _MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.name + "1");
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(

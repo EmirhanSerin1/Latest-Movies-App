@@ -43,7 +43,6 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
           onTap: () => Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                print(widget.name);
                 return MovieDetails(
                   contextForPalet: context,
                   backgroungPath: widget.backgroungPath,

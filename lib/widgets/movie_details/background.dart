@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/models/movie.dart';
 
 class BackgroundImage extends StatelessWidget {
   const BackgroundImage({

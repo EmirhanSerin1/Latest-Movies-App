@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/core/components/custom_text.dart';
 
 class ImdbRate extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/widgets/build_profile_photo/build_profile_photo.dart';
 
 class DrawerTop extends StatelessWidget {
   const DrawerTop({Key? key}) : super(key: key);

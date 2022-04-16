@@ -12,15 +12,16 @@ class PopIcon extends StatelessWidget {
     return Positioned(
       top: 10,
       left: 10,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          color: ColorsMovieDetails.popButtonColor,
+      child: InkWell(
+        onTap: () => Navigator.pop(context),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32),
+            color: ColorsMovieDetails.popButtonColor,
+          ),
+          padding: PaddingMovieDetails.popButtonPadding,
+          child: const Icon(Icons.arrow_back),
         ),
-        padding: PaddingMovieDetails.popButtonPadding,
-        child: InkWell(
-            onTap: () => Navigator.pop(context),
-            child: const Icon(Icons.arrow_back)),
       ),
     );
   }
