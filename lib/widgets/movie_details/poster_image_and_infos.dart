@@ -1,6 +1,6 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/widgets/movie_details/imdb_rate.dart';
@@ -34,8 +34,6 @@ class PosterImageAndOtherInfos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const paddingGeneralH = PaddingMovieDetails.generalPadding;
-
     return Positioned(
       top: 165,
       left: 20,
@@ -43,33 +41,29 @@ class PosterImageAndOtherInfos extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           posterImage(tag.toString()),
-          infos(context, paddingGeneralH),
+          infos(context),
         ],
       ),
     );
   }
 
-  Container infos(BuildContext context, EdgeInsets paddingGeneralH) {
+  Container infos(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width / 2, minHeight: 200),
-      margin: paddingGeneralH,
+          maxWidth: MediaQuery.of(context).size.width / 2, minHeight: MovieDetailsBoxProperties.minHeigt),
+      margin:  PaddingMovieDetails.generalPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(height: 50),
+          SizedBox(height: MovieDetailsBoxProperties.upMovieName),
           //? MovieName
           Text(name, style: Theme.of(context).textTheme.headline6),
-          
-          // buildInfoText(movieItem.adult ? "Adult" : "Everyone", 14),
-          // const SizedBox(height: 8),
           //?ImdbRate
           ImdbRate(
             voteCount: voteCount,
             voteAverage: voteAverage,
           ),
-          // const SizedBox(height: 8),
           //?Release date
           CustomText(
             text: releaseDate.isEmpty
@@ -77,9 +71,8 @@ class PosterImageAndOtherInfos extends StatelessWidget {
                 : releaseDate.substring(0, releaseDate.length - 6),
             textStyle: Theme.of(context).textTheme.caption,
           ),
-          // const SizedBox(height: 8),
           CustomText(
-            text: "Movie Lenght",
+            text: "Movie Lenght ???!!!!",
             textStyle: Theme.of(context).textTheme.bodySmall,
           ),
         ],
@@ -90,12 +83,15 @@ class PosterImageAndOtherInfos extends StatelessWidget {
   posterImage(Object tag) {
     return Hero(
       tag: _getTag(),
-      child: SizedBox(
-        width: 124,
-        height: 200,
-        child: CachedNetworkImage(
-          imageUrl: posterPath,
-          fit: BoxFit.cover,
+      child: Material(
+        color: Colors.transparent,
+        child: SizedBox(
+          width: MovieDetailsBoxProperties.posterImageWidth,
+          height: MovieDetailsBoxProperties.posterImageHeight,
+          child: CachedNetworkImage(
+            imageUrl: posterPath,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

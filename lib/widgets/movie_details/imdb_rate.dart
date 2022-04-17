@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/core/components/custom_text.dart';
+import 'package:latest_movies_app/core/constants/texts/text_movie_details.dart';
 
 class ImdbRate extends StatelessWidget {
   const ImdbRate({
@@ -32,7 +33,7 @@ class ImdbRate extends StatelessWidget {
             borderRadius: BorderRadius.circular(2)),
         child: CustomText(
           text: voteAverage == "0"
-              ? "n/a"
+              ? MovieDetailsTexts.nA
               : voteAverage.length < 3
                   ? voteAverage
                   : voteAverage.substring(0, 3),

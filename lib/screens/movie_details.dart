@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/widgets/movie_details/background.dart';
@@ -81,7 +82,7 @@ class _MovieDetailsState extends State<MovieDetails> {
             children: [
               SizedBox(
                 width: double.infinity,
-                height: 400,
+                height: MovieDetailsBoxProperties.upBodyHeight,
                 child: Stack(
                   children: [
                     BackgroundImage(path: widget.backgroungPath),

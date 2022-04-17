@@ -72,39 +72,41 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
           ),
           child: Hero(
             tag: _getTag(),
-            child: Container(
-              width: MediaQuery.of(context).size.width / 2.5,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(
-                    widget.imagePath,
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                width: MediaQuery.of(context).size.width / 2.5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      widget.imagePath,
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
                 ),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: 10,
-                    left: 10,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 2.6,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.name,
-                            style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                child: Stack(
+                  children: [
+                    Positioned(
+                      bottom: 10,
+                      left: 10,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 2.6,
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.name,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -114,6 +116,62 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
   }
 
   _getTag() {
+    List<dynamic> listNow = widget.movieList!.map((e) => e.title).toList();
+
+    dynamic recommendedNameList =
+        widget.value.recommendeds!.map((e) => e.title).toList();
+
+    dynamic popularNameList =
+        widget.value.populars!.map((e) => e.title).toList();
+
+    dynamic latestNameList =
+        widget.value.latestMovies!.map((e) => e.title).toList();
+
+    if (widget.typeOfList == "populars") {
+      if (listNow
+              .where((element) => recommendedNameList.contains(widget.name))
+              .toList()
+              .isEmpty &&
+          listNow
+              .where((element) => latestNameList.contains(widget.name))
+              .toList()
+              .isEmpty) {
+        return widget.name;
+      } else {
+        return DateTime.now();
+      }
+    } else if (widget.typeOfList == "recommended") {
+      if (listNow
+              .where((element) => popularNameList.contains(widget.name))
+              .toList()
+              .isEmpty &&
+          listNow
+              .where((element) => latestNameList.contains(widget.name))
+              .toList()
+              .isEmpty) {
+        return widget.name;
+      } else {
+        return DateTime.now();
+      }
+    } else if (widget.typeOfList == "latest") {
+      if (listNow
+              .where((element) => popularNameList.contains(widget.name))
+              .toList()
+              .isEmpty &&
+          listNow
+              .where((element) => recommendedNameList.contains(widget.name))
+              .toList()
+              .isEmpty) {
+        return widget.name;
+      } else {
+        return DateTime.now();
+      }
+    } else {
+      return DateTime.now();
+    }
+  }
+
+  _getTagForTitle() {
     List<dynamic> listNow = widget.movieList!.map((e) => e.title).toList();
 
     dynamic recommendedNameList =
