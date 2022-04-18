@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/core/components/custom_text.dart';
 import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
+import 'package:latest_movies_app/work/video/video_embed.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -42,22 +43,7 @@ class Trailer extends StatelessWidget {
                 textStyle: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(height: 10),
-              ClipRRect(
-                child: YoutubePlayerIFrame(
-                  controller: YoutubePlayerController(
-                    initialVideoId: 'K18cpp_-gP8',
-                    params: YoutubePlayerParams(
-                      playlist: [
-                        (snapshot.data as String)
-                      ], // Defining custom playlist
-                      // startAt: Duration(seconds: 30),
-                      showControls: true,
-                      showFullscreenButton: true,
-                    ),
-                  ),
-                  aspectRatio: 16 / 9,
-                ),
-              ),
+              VideoEmbed(url: (snapshot.data as String))
             ],
           ),
         );

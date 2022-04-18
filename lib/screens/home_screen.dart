@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       drawer: const CustomDrawer(),
       body: ListView(
@@ -18,14 +17,10 @@ class HomeScreen extends StatelessWidget {
           HomeAppBar(),
           MoviesTitle(title: "Popular Movies"),
           MovieList(typeOfMovie: "populars"),
-
           MoviesTitle(title: "Recommendeds"),
           MovieList(typeOfMovie: "recommended"),
-          
           MoviesTitle(title: "Latest Movies"),
           MovieList(typeOfMovie: "latest"),
-          
-          
         ],
       ),
     );

@@ -51,40 +51,38 @@ class MovieList extends StatelessWidget {
   }
 
   Future<void>? getFuture(MoviesProv prov) {
-    if(typeOfMovie == "populars"){
+    if (typeOfMovie == "populars") {
       return prov.getPopulars();
-    }else if(typeOfMovie == "recommended"){
+    } else if (typeOfMovie == "recommended") {
       return prov.getRecommendeds(movieId: "100");
-    }else if(typeOfMovie == "latest") {
+    } else if (typeOfMovie == "latest") {
       return prov.getLatestMovies();
-    }else{
+    } else {
       return prov.getPopulars();
     }
   }
 
-   getItemList(MoviesProv value) {
-    if(typeOfMovie == "populars"){
+  List<Movie>? getItemList(MoviesProv value) {
+    if (typeOfMovie == "populars") {
       return value.populars;
-    }else if(typeOfMovie == "recommended"){
+    } else if (typeOfMovie == "recommended") {
       return value.recommendeds;
-    }else if(typeOfMovie == "latest") {
+    } else if (typeOfMovie == "latest") {
       return value.latestMovies;
-    }else{
+    } else {
       return value.populars;
     }
   }
 
   Movie getItem(MoviesProv value, int index) {
-    if(typeOfMovie == "populars"){
+    if (typeOfMovie == "populars") {
       return value.populars![index];
-    }else if(typeOfMovie == "recommended"){
+    } else if (typeOfMovie == "recommended") {
       return value.recommendeds![index];
-    }else if(typeOfMovie == "latest") {
+    } else if (typeOfMovie == "latest") {
       return value.latestMovies![index];
-    }else{
+    } else {
       return value.populars![index];
     }
   }
-
-
 }
