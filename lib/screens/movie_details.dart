@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/core/components/custom_text.dart';
+import 'package:latest_movies_app/core/components/page_route.dart';
 import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
+import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/widgets/movie_details/background.dart';
@@ -34,7 +37,8 @@ class MovieDetails extends StatefulWidget {
       voteCount,
       voteAverage,
       releaseDate,
-      id, typeOfList;
+      id,
+      typeOfList;
   final List<Movie>? movieList;
   final MoviesProv value;
 
@@ -79,6 +83,7 @@ class _MovieDetailsState extends State<MovieDetails> {
               BoxConstraints(minHeight: MediaQuery.of(context).size.height),
           decoration: detailsBodyBoxDecoration(dominant, muted),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
                 width: double.infinity,
@@ -102,7 +107,44 @@ class _MovieDetailsState extends State<MovieDetails> {
                 ),
               ),
               OverView(text: widget.overview),
-              Trailer(id: widget.id),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: PaddingMovieDetails.horizontalPadding +
+                        const EdgeInsets.only(top: 40, bottom: 10),
+                    child: CustomText(
+                      text: "Trailer",
+                      textStyle: Theme.of(context).textTheme.headline6,
+                    ),
+                  ),
+                  SizedBox(
+                    child: Hero(
+                      tag: "special",
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Container(
+                          constraints: const BoxConstraints(maxWidth: 350),
+                          margin: PaddingMovieDetails.horizontalPadding +
+                              const EdgeInsets.only(bottom: 40),
+                          width: double.infinity,
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () => Navigator.of(context).push(
+                              createRoute(Trailer(id: widget.id),x: 0, y: 1),
+                            ),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: Image.asset("assets/youtube.png"),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

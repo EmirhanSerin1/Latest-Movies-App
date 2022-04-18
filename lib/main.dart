@@ -30,11 +30,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // home: const HomeScreen(),
-        // home: const WorkScreen(),
+        home: const HomeScreen(),
 
         // * Providerları burada test ediyorum üsttekini yorumdan çıkart.
-        home: const WorkScreen(),
+        // home: const WorkScreen(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/core/components/custom_text.dart';
+import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
 import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 import 'package:latest_movies_app/work/video/video_embed.dart';
 import 'package:provider/provider.dart';
@@ -17,37 +18,56 @@ class Trailer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Provider.of<MoviesProv>(context, listen: false)
-          .getTrailer(movieId: id),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        return Container(
-          constraints: const BoxConstraints(maxWidth: 350),
-          margin: PaddingMovieDetails.generalPadding +
-              const EdgeInsets.only(top: 40, bottom: 40),
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                text: "Trailer",
-                textStyle: Theme.of(context).textTheme.headline6,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: SizedBox(
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Hero(
+            tag: "special",
+            child: Material(
+              color: Colors.transparent,
+              child: FutureBuilder(
+                future: Provider.of<MoviesProv>(context, listen: false)
+                    .getTrailer(movieId: id),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: Padding(
+                        padding: PaddingMovieDetails.horizontalPadding,
+                        child:
+                            SizedBox(child: Image.asset("assets/youtube.png")),
+                      ),
+                    );
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const Padding(
+                      padding: EdgeInsets.only(bottom: 40),
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    );
+                  }
+                  return Center(
+                    child: Padding(
+                      padding: PaddingMovieDetails.horizontalPadding,
+                      child: SizedBox(
+                        child: VideoEmbed(url: (snapshot.data as String)),
+                      ),
+                    ),
+                  );
+                },
               ),
-              const SizedBox(height: 10),
-              VideoEmbed(url: (snapshot.data as String))
-            ],
+            ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:latest_movies_app/core/components/page_route.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/screens/movie_details.dart';
@@ -47,27 +48,27 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Colors.grey.shade800,
+          color: Colors.transparent,
         ),
         child: InkWell(
           onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return MovieDetails(
-                  contextForPalet: context,
-                  backgroungPath: widget.backgroungPath,
-                  imagePath: widget.imagePath,
-                  name: widget.name,
-                  overview: widget.overview,
-                  id: widget.id,
-                  releaseDate: widget.releaseDate,
-                  voteAverage: widget.voteAverage,
-                  voteCount: widget.voteCount,
-                  movieList: widget.movieList,
-                  value: widget.value,
-                  typeOfList: widget.typeOfList,
-                );
-              },
+            createRoute(
+              MovieDetails(
+                contextForPalet: context,
+                backgroungPath: widget.backgroungPath,
+                imagePath: widget.imagePath,
+                name: widget.name,
+                overview: widget.overview,
+                id: widget.id,
+                releaseDate: widget.releaseDate,
+                voteAverage: widget.voteAverage,
+                voteCount: widget.voteCount,
+                movieList: widget.movieList,
+                value: widget.value,
+                typeOfList: widget.typeOfList,
+              ),
+              x: 1,
+              y: 1,
             ),
           ),
           child: Hero(
@@ -116,62 +117,6 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
   }
 
   _getTag() {
-    List<dynamic> listNow = widget.movieList!.map((e) => e.title).toList();
-
-    dynamic recommendedNameList =
-        widget.value.recommendeds!.map((e) => e.title).toList();
-
-    dynamic popularNameList =
-        widget.value.populars!.map((e) => e.title).toList();
-
-    dynamic latestNameList =
-        widget.value.latestMovies!.map((e) => e.title).toList();
-
-    if (widget.typeOfList == "populars") {
-      if (listNow
-              .where((element) => recommendedNameList.contains(widget.name))
-              .toList()
-              .isEmpty &&
-          listNow
-              .where((element) => latestNameList.contains(widget.name))
-              .toList()
-              .isEmpty) {
-        return widget.name;
-      } else {
-        return DateTime.now();
-      }
-    } else if (widget.typeOfList == "recommended") {
-      if (listNow
-              .where((element) => popularNameList.contains(widget.name))
-              .toList()
-              .isEmpty &&
-          listNow
-              .where((element) => latestNameList.contains(widget.name))
-              .toList()
-              .isEmpty) {
-        return widget.name;
-      } else {
-        return DateTime.now();
-      }
-    } else if (widget.typeOfList == "latest") {
-      if (listNow
-              .where((element) => popularNameList.contains(widget.name))
-              .toList()
-              .isEmpty &&
-          listNow
-              .where((element) => recommendedNameList.contains(widget.name))
-              .toList()
-              .isEmpty) {
-        return widget.name;
-      } else {
-        return DateTime.now();
-      }
-    } else {
-      return DateTime.now();
-    }
-  }
-
-  _getTagForTitle() {
     List<dynamic> listNow = widget.movieList!.map((e) => e.title).toList();
 
     dynamic recommendedNameList =

@@ -51,7 +51,7 @@ class PosterImageAndOtherInfos extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width / 2, minHeight: MovieDetailsBoxProperties.minHeigt),
-      margin:  PaddingMovieDetails.generalPadding,
+      margin:  PaddingMovieDetails.horizontalPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
