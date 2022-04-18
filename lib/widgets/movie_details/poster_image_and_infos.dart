@@ -19,6 +19,7 @@ class PosterImageAndOtherInfos extends StatelessWidget {
     required this.movieList,
     required this.value,
     required this.typeOfList,
+    required this.adult,
   }) : super(key: key);
 
   final String posterPath,
@@ -28,6 +29,7 @@ class PosterImageAndOtherInfos extends StatelessWidget {
       voteAverage,
       typeOfList;
   final String tag;
+  final bool adult;
 
   final List<Movie>? movieList;
   final MoviesProv value;
@@ -40,7 +42,7 @@ class PosterImageAndOtherInfos extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          posterImage(tag.toString()),
+          posterImage(tag.toString(), context),
           infos(context),
         ],
       ),
@@ -50,8 +52,9 @@ class PosterImageAndOtherInfos extends StatelessWidget {
   Container infos(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width / 2, minHeight: MovieDetailsBoxProperties.minHeigt),
-      margin:  PaddingMovieDetails.horizontalPadding,
+          maxWidth: MediaQuery.of(context).size.width / 2,
+          minHeight: MovieDetailsBoxProperties.minHeigt),
+      margin: PaddingMovieDetails.horizontalPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,7 +75,7 @@ class PosterImageAndOtherInfos extends StatelessWidget {
             textStyle: Theme.of(context).textTheme.caption,
           ),
           CustomText(
-            text: "Movie Lenght ???!!!!",
+            text: adult ? "Everyone can watch" : "Only adults can watch",
             textStyle: Theme.of(context).textTheme.bodySmall,
           ),
         ],
@@ -80,17 +83,31 @@ class PosterImageAndOtherInfos extends StatelessWidget {
     );
   }
 
-  posterImage(Object tag) {
+  posterImage(Object tag, BuildContext context) {
     return Hero(
       tag: _getTag(),
       child: Material(
         color: Colors.transparent,
         child: SizedBox(
-          width: MovieDetailsBoxProperties.posterImageWidth,
           height: MovieDetailsBoxProperties.posterImageHeight,
-          child: CachedNetworkImage(
-            imageUrl: posterPath,
-            fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 7 / 10,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(posterPath),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  name,
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.transparent),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ),
       ),

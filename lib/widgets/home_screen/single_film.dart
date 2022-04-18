@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:latest_movies_app/core/components/page_route.dart';
+import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/screens/movie_details.dart';
@@ -20,6 +21,7 @@ class SingleFilmItem extends StatefulWidget {
     required this.movieList,
     required this.value,
     required this.typeOfList,
+    required this.adult,
   }) : super(key: key);
 
   final String name,
@@ -32,7 +34,7 @@ class SingleFilmItem extends StatefulWidget {
       voteCount,
       voteAverage,
       typeOfList;
-
+  final bool adult;
   final List<Movie>? movieList;
   final MoviesProv value;
 
@@ -66,6 +68,7 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
                 movieList: widget.movieList,
                 value: widget.value,
                 typeOfList: widget.typeOfList,
+                adult: widget.adult,
               ),
               x: 1,
               y: 1,
@@ -74,41 +77,29 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
           child: Hero(
             tag: _getTag(),
             child: Material(
-              color: Colors.transparent,
-              child: Container(
-                width: MediaQuery.of(context).size.width / 2.5,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      widget.imagePath,
-                    ),
-                    fit: BoxFit.cover,
-                  ),
+        color: Colors.transparent,
+        child: SizedBox(
+          child: AspectRatio(
+            aspectRatio: 7 / 10.2,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(widget.imagePath),
+                  fit: BoxFit.cover,
                 ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 10,
-                      left: 10,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width / 2.6,
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.name,
-                              style: Theme.of(context).textTheme.bodyText2,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+              ),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  widget.name,
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
+          ),
+        ),
+      ),
           ),
         ),
       ),

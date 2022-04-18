@@ -13,6 +13,7 @@ class BackgroundImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       path,
+      width: MediaQuery.of(context).size.width,
       fit: BoxFit.cover,
     );
   }

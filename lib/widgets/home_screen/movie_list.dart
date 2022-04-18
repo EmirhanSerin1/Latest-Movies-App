@@ -28,6 +28,7 @@ class MovieList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Movie item = getItem(value, index);
                   return SingleFilmItem(
+                    adult: item.adult,
                     overview: item.overview ?? "",
                     backgroungPath: item.backdrop_path ?? "",
                     name: item.title,

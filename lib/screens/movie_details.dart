@@ -29,6 +29,7 @@ class MovieDetails extends StatefulWidget {
     required this.value,
     required this.id,
     required this.typeOfList,
+    required this.adult,
   }) : super(key: key);
   final BuildContext contextForPalet;
   final String overview,
@@ -40,6 +41,7 @@ class MovieDetails extends StatefulWidget {
       releaseDate,
       id,
       typeOfList;
+      final bool adult;
   final List<Movie>? movieList;
   final MoviesProv value;
 
@@ -81,10 +83,11 @@ class _MovieDetailsState extends State<MovieDetails> {
       child: SingleChildScrollView(
         child: Container(
           constraints:
-              BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+              BoxConstraints(minHeight: MediaQuery.of(context).size.height, minWidth: MediaQuery.of(context).size.width),
           decoration: detailsBodyBoxDecoration(dominant, muted),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: double.infinity,
@@ -103,16 +106,13 @@ class _MovieDetailsState extends State<MovieDetails> {
                       movieList: widget.movieList,
                       value: widget.value,
                       typeOfList: widget.typeOfList,
+                      adult: widget.adult,
                     ),
                   ],
                 ),
               ),
               OverView(text: widget.overview),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
+              Padding(
                     padding: PaddingMovieDetails.horizontalPadding +
                         const EdgeInsets.only(top: 40, bottom: 10),
                     child: CustomText(
@@ -120,31 +120,29 @@ class _MovieDetailsState extends State<MovieDetails> {
                       textStyle: Theme.of(context).textTheme.headline6,
                     ),
                   ),
-                  SizedBox(
-                    child: Hero(
-                      tag: "special",
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Container(
-                          constraints: const BoxConstraints(maxWidth: 350),
-                          margin: PaddingMovieDetails.horizontalPadding +
-                              const EdgeInsets.only(bottom: 40),
-                          width: double.infinity,
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () => Navigator.of(context).push(
-                              createRoute(Trailer(id: widget.id), x: 0, y: 1),
-                            ),
-                            child: AspectRatio(
-                              aspectRatio: 16 / 9,
-                              child: Image.asset(MovieDetailsImages.youtube),
-                            ),
-                          ),
+              SizedBox(
+                child: Hero(
+                  tag: "special",
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Container(
+                      constraints: const BoxConstraints(maxWidth: 350),
+                      margin: PaddingMovieDetails.horizontalPadding +
+                          const EdgeInsets.only(bottom: 40),
+                      width: double.infinity,
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          createRoute(Trailer(id: widget.id), x: 0, y: 1),
+                        ),
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: Image.asset(MovieDetailsImages.youtube),
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
