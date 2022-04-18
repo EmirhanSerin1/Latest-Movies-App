@@ -7,7 +7,7 @@ import 'package:latest_movies_app/work/video/video_embed.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../../providers/movies_prov.dart';
+import '../providers/movies_prov.dart';
 
 class Trailer extends StatelessWidget {
   const Trailer({
