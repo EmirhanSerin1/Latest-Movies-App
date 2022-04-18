@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:latest_movies_app/models/cast.dart';
+import 'package:latest_movies_app/models/cast_detail.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import '../models/functions_enum.dart';
 
@@ -36,10 +38,12 @@ class MoviesProv extends ChangeNotifier {
   final String cast_url_and_details =
       "https://api.themoviedb.org/3/movie/550?api_key=9240023865dd052e90b0564d9b5f6179&append_to_response=credits";
   final String cast_url2 =
-      "https://api.themoviedb.org/3/movie/551/credits?api_key=9240023865dd052e90b0564d9b5f6179";
+      "https://api.themoviedb.org/3/movie/550/credits?api_key=9240023865dd052e90b0564d9b5f6179";
 
   final String imageNotFoundUrl =
       "https://blog.hubspot.com/hubfs/Sales_Blog/famous-movie-quotes.jpg";
+
+  List<Cast>? casts = [];
 
   List<Movie>? populars = [];
   List<Movie>? recommendeds = [];
@@ -216,5 +220,41 @@ class MoviesProv extends ChangeNotifier {
       await getLatestMovies(pageNumber: pageNumber);
     }
     notifyListeners();
+  }
+
+  Future<void> getCastandDetails(String movieId) async {
+    /// After sending this request get [casts] list
+
+    String cast2 =
+        "https://api.themoviedb.org/3/movie/$movieId/credits?api_key=9240023865dd052e90b0564d9b5f6179";
+
+    Response<Map> response = await dio.get(cast2);
+    List<dynamic> castlist = response.data!["cast"];
+    for (var element in castlist) {
+      casts?.add(Cast.fromJson(element));
+    }
+
+    List results = response.data!["cast"];
+    if (results.isEmpty) {
+      casts = [];
+    } else {
+      casts = castlist.map((e) => Cast.fromJson(e)).toList();
+    }
+  }
+
+  Future<CastDetail?> getCastDetails({required String castId}) async {
+    String castDetailUrl =
+        "https://api.themoviedb.org/3/person/$castId?api_key=9240023865dd052e90b0564d9b5f6179&language=en-US";
+
+    Response<Map> response = await dio.get(castDetailUrl);
+    // print(response);
+    // return response.data;
+    if (response.data == null) return null;
+
+    return CastDetail.fromJson((response.data as Map<String, dynamic>));
+    // print(x.job);
+    // return x;
+    // // final x = Credit.fromJson(response.data ?? {});
+    // // print(x.id);
   }
 }
