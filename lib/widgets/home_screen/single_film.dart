@@ -78,7 +78,6 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
               child: Container(
                 width: MediaQuery.of(context).size.width / 2.5,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
                     image: CachedNetworkImageProvider(
                       widget.imagePath,

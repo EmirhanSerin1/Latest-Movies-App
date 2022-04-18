@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:latest_movies_app/core/components/custom_text.dart';
 import 'package:latest_movies_app/core/components/page_route.dart';
 import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
+import 'package:latest_movies_app/core/constants/images/movie_details_images.dart';
 import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
@@ -132,11 +133,11 @@ class _MovieDetailsState extends State<MovieDetails> {
                           color: Colors.transparent,
                           child: InkWell(
                             onTap: () => Navigator.of(context).push(
-                              createRoute(Trailer(id: widget.id),x: 0, y: 1),
+                              createRoute(Trailer(id: widget.id), x: 0, y: 1),
                             ),
                             child: AspectRatio(
                               aspectRatio: 16 / 9,
-                              child: Image.asset("assets/youtube.png"),
+                              child: Image.asset(MovieDetailsImages.youtube),
                             ),
                           ),
                         ),

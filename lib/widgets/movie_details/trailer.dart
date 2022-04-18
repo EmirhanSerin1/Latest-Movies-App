@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/core/components/custom_text.dart';
 import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
+import 'package:latest_movies_app/core/constants/images/movie_details_images.dart';
 import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 import 'package:latest_movies_app/work/video/video_embed.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class Trailer extends StatelessWidget {
                       child: Padding(
                         padding: PaddingMovieDetails.horizontalPadding,
                         child:
-                            SizedBox(child: Image.asset("assets/youtube.png")),
+                            SizedBox(child: Image.asset(MovieDetailsImages.youtube)),
                       ),
                     );
                   } else if (snapshot.connectionState ==
