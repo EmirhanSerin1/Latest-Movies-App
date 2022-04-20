@@ -8,7 +8,7 @@ class OverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: PaddingMovieDetails.horizontalPadding,
+      padding: PaddingMovieDetails.horizontalPadding + EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

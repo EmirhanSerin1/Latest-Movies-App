@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/core/components/custom_text.dart';
 import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
 import 'package:latest_movies_app/core/constants/images/movie_details_images.dart';
 import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
+import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/work/video/video_embed.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-
-import '../providers/movies_prov.dart';
 
 class Trailer extends StatelessWidget {
   const Trailer({
@@ -26,7 +23,7 @@ class Trailer extends StatelessWidget {
       ),
       body: SizedBox(
         child: AspectRatio(
-          aspectRatio: 16 / 9,
+          aspectRatio: MovieDetailsBoxProperties.aspectRadio,
           child: Hero(
             tag: "special",
             child: Material(
@@ -39,19 +36,16 @@ class Trailer extends StatelessWidget {
                     return Center(
                       child: Padding(
                         padding: PaddingMovieDetails.horizontalPadding,
-                        child:
-                            SizedBox(child: Image.asset(MovieDetailsImages.youtube)),
+                        child: SizedBox(
+                            child: Image.asset(MovieDetailsImages.youtube)),
                       ),
                     );
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const Padding(
-                      padding: EdgeInsets.only(bottom: 40),
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                    return AspectRatio(
+                      aspectRatio: MovieDetailsBoxProperties.aspectRadio,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
                       ),
                     );
                   }

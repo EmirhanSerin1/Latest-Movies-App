@@ -4,7 +4,6 @@ import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_d
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/widgets/movie_details/imdb_rate.dart';
-import 'package:latest_movies_app/core/components/custom_text.dart';
 import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 
 class PosterImageAndOtherInfos extends StatelessWidget {
@@ -68,15 +67,17 @@ class PosterImageAndOtherInfos extends StatelessWidget {
             voteAverage: voteAverage,
           ),
           //?Release date
-          CustomText(
-            text: releaseDate.isEmpty
+
+          Text(
+            releaseDate.isEmpty
                 ? "n/a"
                 : releaseDate.substring(0, releaseDate.length - 6),
-            textStyle: Theme.of(context).textTheme.caption,
+            style: Theme.of(context).textTheme.caption,
           ),
-          CustomText(
-            text: adult ? "Everyone can watch" : "Only adults can watch",
-            textStyle: Theme.of(context).textTheme.bodySmall,
+
+          Text(
+            adult == false ? "Everyone can watch" : "Only adults can watch",
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),
@@ -103,7 +104,10 @@ class PosterImageAndOtherInfos extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Text(
                   name,
-                  style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.transparent),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2!
+                      .copyWith(color: Colors.transparent),
                   textAlign: TextAlign.center,
                 ),
               ),

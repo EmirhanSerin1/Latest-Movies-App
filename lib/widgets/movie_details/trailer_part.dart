@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/core/components/custom_text.dart';
 import 'package:latest_movies_app/core/components/page_route.dart';
+import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
 import 'package:latest_movies_app/core/constants/images/movie_details_images.dart';
 import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details.dart';
 import 'package:latest_movies_app/screens/movie_details.dart';
@@ -22,13 +21,12 @@ class TrailerPart extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Padding(
-              padding: PaddingMovieDetails.horizontalPadding +
-                  const EdgeInsets.only(top: 20, bottom: 10),
-              child: CustomText(
-                text: "Trailer",
-                textStyle: Theme.of(context).textTheme.headline6,
-              ),
-            ),
+            padding: PaddingMovieDetails.horizontalPadding +
+                PaddingMovieDetails.trailerVertical,
+            child: Text(
+              "Trailer",
+              style: Theme.of(context).textTheme.headline6,
+            )),
         SizedBox(
           child: Hero(
             tag: "special",
@@ -36,8 +34,7 @@ class TrailerPart extends StatelessWidget {
               color: Colors.transparent,
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 350),
-                margin: PaddingMovieDetails.horizontalPadding +
-                    const EdgeInsets.only(bottom: 40),
+                margin: PaddingMovieDetails.horizontalPadding,
                 width: double.infinity,
                 color: Colors.transparent,
                 child: InkWell(
@@ -45,7 +42,7 @@ class TrailerPart extends StatelessWidget {
                     createRoute(Trailer(id: widget.id), x: 0, y: 1),
                   ),
                   child: AspectRatio(
-                    aspectRatio: 16 / 9,
+                    aspectRatio: MovieDetailsBoxProperties.aspectRadio,
                     child: Image.asset(MovieDetailsImages.youtube),
                   ),
                 ),

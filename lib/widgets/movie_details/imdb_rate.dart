@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/core/components/custom_text.dart';
 import 'package:latest_movies_app/core/constants/texts/text_movie_details.dart';
 
 class ImdbRate extends StatelessWidget {
@@ -15,10 +14,10 @@ class ImdbRate extends StatelessWidget {
       children: [
         rate(context),
         const Text("-  "),
-        CustomText(
-          text: "Result of " + voteCount + " votes",
-          textStyle: Theme.of(context).textTheme.caption,
-        )
+        Text(
+          "Result of " + voteCount + " votes",
+          style: Theme.of(context).textTheme.caption,
+        ),
       ],
     );
   }
@@ -31,13 +30,13 @@ class ImdbRate extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border.all(width: 1, color: Colors.grey),
             borderRadius: BorderRadius.circular(2)),
-        child: CustomText(
-          text: voteAverage == "0"
+        child: Text(
+          voteAverage == "0"
               ? MovieDetailsTexts.nA
               : voteAverage.length < 3
                   ? voteAverage
                   : voteAverage.substring(0, 3),
-          textStyle: Theme.of(context)
+          style: Theme.of(context)
               .textTheme
               .caption
               ?.copyWith(color: Colors.white),
