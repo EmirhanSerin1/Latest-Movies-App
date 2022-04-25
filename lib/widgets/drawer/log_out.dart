@@ -35,9 +35,7 @@ class LogOut extends StatelessWidget {
           children: [
             const Text("Log Out"),
             InkWell(
-              onTap: () {
-                showAlertdialog(context);
-              },
+              onTap: () => showAlertdialog(context),
               child: const Icon(
                 Icons.power_settings_new,
                 color: Colors.red,
