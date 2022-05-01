@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LogOutAlertDialog extends StatelessWidget {
   const LogOutAlertDialog({Key? key}) : super(key: key);
@@ -24,6 +25,8 @@ showAlertdialog(BuildContext context) {
         TextButton(
           onPressed: () async {
             await FirebaseAuth.instance.signOut();
+            final isSignedIn = await GoogleSignIn().isSignedIn();
+            if (isSignedIn) await GoogleSignIn().signOut();
             Navigator.pop(context);
           }, //logout(context),
           child: const Text('OK'),

@@ -25,10 +25,10 @@ class LoginScreen extends StatelessWidget {
             ),
             providerConfigs: const [
               EmailProviderConfiguration(),
-              // GoogleProviderConfiguration(
-              //   clientId:
-              //       '73640989291-c0l6vi0v9o2hhvoqjmfrl9k6t1h8pv1e.apps.googleusercontent.com',
-              // ),
+              GoogleProviderConfiguration(
+                clientId:
+                    '380129403126-apnc1qskmdokisupt3qs6v0s6l4sdggv.apps.googleusercontent.com',
+              ),
               // PhoneProviderConfiguration()
             ],
           ),
