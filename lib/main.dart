@@ -28,25 +28,11 @@ class MyApp extends StatelessWidget {
           create: (context) => MoviesProv(),
         ),
       ],
-<<<<<<< HEAD
-      child: MaterialApp(
-        darkTheme: ThemeData.dark(),
-        themeMode: ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomeScreen(),
-
-        // * Providerları burada test ediyorum üsttekini yorumdan çıkart.
-        // home: const WorkScreen(),
-      ),
-=======
       child: FutureBuilder(
           future: Firebase.initializeApp(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             return MaterialApp(
               darkTheme: ThemeData.dark(),
@@ -73,7 +59,6 @@ class MyApp extends StatelessWidget {
               // home: const WorkScreen(),
             );
           }),
->>>>>>> 9750c6bfc6cf7384591d9d57e6fe4a85a33437dc
     );
   }
 }
