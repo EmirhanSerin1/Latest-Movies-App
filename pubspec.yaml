@@ -28,28 +28,28 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.2.0
+  cloud_firestore: ^3.1.12
   cupertino_icons: ^1.0.2
   dio: ^4.0.4
+  firebase_auth: ^3.3.14
+  firebase_core: ^1.14.1
   flutter:
     sdk: flutter
   flutterfire_ui: ^0.3.6+1
   palette_generator: ^0.3.3
-  provider: ^6.0.2
-  youtube_player_iframe: ^2.2.2
-  youtube_metadata: ^1.0.1
-  # video_player: ^2.3.0
   pod_player: ^0.0.3
-  
-dev_dependencies:
+  provider: ^6.0.2
+  youtube_metadata: ^1.0.1
+  youtube_player_iframe: ^2.2.2
+  google_sign_in: ^5.2.4
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+
+dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+  flutter_cors: ^1.3.2
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
