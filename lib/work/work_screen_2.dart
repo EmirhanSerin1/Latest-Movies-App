@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/work/video/metadata.dart';
-import 'package:latest_movies_app/work/video/video_embed.dart';
 // import 'package:latest_movies_app/work/video_embed.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_metadata/youtube_metadata.dart' as yt;
-import 'package:pod_player/pod_player.dart';
 
 class WorkScreen2 extends StatefulWidget {
   final Movie movie;

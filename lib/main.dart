@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/i10n.dart';
 import 'package:latest_movies_app/providers/auth.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/screens/home_screen.dart';
 import 'package:latest_movies_app/work/login/login_screen.dart';
-import 'package:latest_movies_app/work/work_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pod_player/pod_player.dart';
-import 'package:youtube_metadata/youtube_metadata.dart';
 
 class VideoEmbed extends StatefulWidget {
   final String url;
