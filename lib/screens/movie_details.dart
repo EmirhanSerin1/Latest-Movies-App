@@ -110,12 +110,17 @@ class _MovieDetailsState extends State<MovieDetails> {
               ),
             ),
           ),
-          CastList(id: widget.id),
+          CastList(
+            muted: muted,
+            id: widget.id,
+            motherMovieImage: widget.backgroungPath,
+          ),
           TrailerPart(widget: widget),
-          const SizedBox(height: 40,),
+          const SizedBox(
+            height: 40,
+          ),
         ],
       ),
     ));
   }
 }
-

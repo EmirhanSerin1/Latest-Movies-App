@@ -5,12 +5,20 @@ import 'package:latest_movies_app/core/constants/paddings/paddings_movie_details
 import 'package:latest_movies_app/models/cast.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/screens/cast_detail.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:provider/provider.dart';
 
 class CastList extends StatelessWidget {
-  const CastList({Key? key, required this.id}) : super(key: key);
+  const CastList(
+      {Key? key,
+      required this.id,
+      required this.motherMovieImage,
+      required this.muted})
+      : super(key: key);
 
   final String id;
+  final String motherMovieImage;
+  final PaletteColor? muted;
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +78,14 @@ class CastList extends StatelessWidget {
                       InkWell(
                         onTap: () => Navigator.of(context).push(createRoute(
                             CastDetails(
-                                castId: casts[index].id.toString()),
+                              castId: casts[index].id.toString(),
+                              motherMovieImage: motherMovieImage,
+                              muted: muted,
+                            ),
                             x: 1,
                             y: 1)),
                         child: Padding(
-                          padding:  PaddingMovieDetails.allEight / 2,
+                          padding: PaddingMovieDetails.allEight / 2,
                           child: SizedBox(
                             width: MovieDetailsBoxProperties.castWidth,
                             height: MovieDetailsBoxProperties.castHeight,
