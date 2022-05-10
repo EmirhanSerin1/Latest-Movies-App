@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:latest_movies_app/core/constants/paddings/padding_cast_details.dart';
 import 'package:latest_movies_app/models/cast_detail.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
+import 'package:latest_movies_app/widgets/movie_details/movie_details_exports.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +57,7 @@ class _CastDetailsState extends State<CastDetails> {
                 child: Stack(
                   children: [
                     Image.network(widget.motherMovieImage),
+                    const PopIcon(),
                     Positioned(
                       bottom: 0,
                       child: Container(
@@ -81,18 +84,25 @@ class _CastDetailsState extends State<CastDetails> {
               // Text(credit.id.toString()),
               // Text(credit.birthday.toString()),
               // Text(credit.deathday.toString()),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(credit.gender == 2 ? "Man" : "Woman"),
-                  Text(credit.placeOfBirth.toString()),
-                ],
+              Padding(
+                padding: PaddingCastDetails.horizontalPadding +
+                    const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    credit.gender == 2
+                        ? const Icon(Icons.male, color: Colors.blue)
+                        :  Icon(Icons.female, color: Colors.pink.shade400),
+                    Text(credit.placeOfBirth.toString()),
+                  ],
+                ),
               ),
 
               // Gender 1 Kadın, 2 Erkek.
               // Text(credit.imdbId.toString()),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: PaddingCastDetails.horizontalPadding +
+                    const EdgeInsets.symmetric(vertical: 20),
                 child: Text(credit.biography.toString()),
               ),
               // Text(credit.homepage.toString()),
