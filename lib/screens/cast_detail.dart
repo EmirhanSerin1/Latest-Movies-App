@@ -66,9 +66,14 @@ class _CastDetailsState extends State<CastDetails> {
                         decoration: BoxDecoration(
                           color: Colors.transparent,
                           image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://image.tmdb.org/t/p/w500" +
-                                      credit.profilePath.toString()),
+                              image: credit.profilePath != null
+                                  ? NetworkImage(
+                                      "https://image.tmdb.org/t/p/w500" +
+                                          credit.profilePath.toString(),
+                                    )
+                                  : const NetworkImage(
+                                      "https://i0.wp.com/1.bp.blogspot.com/_saHCz6YS_o0/S2gmYeLBmXI/AAAAAAAAAds/XeUYqR1QWAY/s320/unknown-person.gif?zoom=2",
+                                    ),
                               fit: BoxFit.contain),
                         ),
                       ),
@@ -76,6 +81,7 @@ class _CastDetailsState extends State<CastDetails> {
                   ],
                 ),
               ),
+              // "https://blog.hubspot.com/hubfs/Sales_Blog/famous-movie-quotes.jpg"
               // ...credit.alsoKnownAs!
               //     .map(
               //       (e) => Text(e.toString()),
@@ -87,13 +93,20 @@ class _CastDetailsState extends State<CastDetails> {
               Padding(
                 padding: PaddingCastDetails.horizontalPadding +
                     const EdgeInsets.symmetric(vertical: 20),
+                child: Text(credit.name != null ? credit.name.toString() : ""),
+              ),
+              Padding(
+                padding: PaddingCastDetails.horizontalPadding +
+                    const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     credit.gender == 2
                         ? const Icon(Icons.male, color: Colors.blue)
-                        :  Icon(Icons.female, color: Colors.pink.shade400),
-                    Text(credit.placeOfBirth.toString()),
+                        : Icon(Icons.female, color: Colors.pink.shade400),
+                    Text(credit.placeOfBirth != null
+                        ? credit.placeOfBirth.toString()
+                        : ""),
                   ],
                 ),
               ),
@@ -103,7 +116,9 @@ class _CastDetailsState extends State<CastDetails> {
               Padding(
                 padding: PaddingCastDetails.horizontalPadding +
                     const EdgeInsets.symmetric(vertical: 20),
-                child: Text(credit.biography.toString()),
+                child: Text(credit.biography != null
+                    ? credit.biography.toString()
+                    : ""),
               ),
               // Text(credit.homepage.toString()),
             ],
