@@ -21,7 +21,7 @@ class HomeRandomMovie extends StatelessWidget {
               return Consumer<MoviesProv>(
                 builder: (context, value, child) {
                   if (snapshot.hasData) {
-                    return const SizedBox();
+                    return RepaintBoundary(child: const SizedBox());
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -30,6 +30,15 @@ class HomeRandomMovie extends StatelessWidget {
                     return Stack(
                       alignment: Alignment.center,
                       children: [
+                        Positioned(
+                          top: 20,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.network(
+                              item.backdrop_path.toString(),
+                            ),
+                          ),
+                        ),
                         Positioned(
                           bottom: 25,
                           child: SizedBox(
@@ -45,6 +54,7 @@ class HomeRandomMovie extends StatelessWidget {
                         Positioned(
                           bottom: 0,
                           child: Container(
+                            padding: const EdgeInsets.all(8),
                             color: Colors.grey.shade700.withOpacity(0.8),
                             height: 100,
                             width: 250,
@@ -53,11 +63,13 @@ class HomeRandomMovie extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(item.title.toString()),
-                                Text(
-                                  item.overview.toString(),
-                                  style: Theme.of(context).textTheme.caption,
-                                  maxLines: 5,
-                                  overflow: TextOverflow.clip,
+                                Expanded(
+                                  child: Text(
+                                    item.overview.toString(),
+                                    style: Theme.of(context).textTheme.caption,
+                                    maxLines: 5,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 )
                               ],
                             ),

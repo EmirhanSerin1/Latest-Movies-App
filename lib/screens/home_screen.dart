@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(30, 30, 30, 30),
       drawer: const CustomDrawer(),
       body: ListView(
         children: const [
@@ -19,10 +20,11 @@ class HomeScreen extends StatelessWidget {
           HomeRandomMovie(),
           MoviesTitle(title: "Popular Movies"),
           MovieList(typeOfMovie: "populars"),
-          MoviesTitle(title: "Recommendeds"),
-          MovieList(typeOfMovie: "recommended"),
-          MoviesTitle(title: "Latest Movies"),
-          MovieList(typeOfMovie: "latest"),
+          // MoviesTitle(title: "Recommendeds"),
+          // MovieList(typeOfMovie: "recommended"),
+          // MoviesTitle(title: "Latest Movies"),
+          // MovieList(typeOfMovie: "latest"),
+          SizedBox(height: 50)
         ],
       ),
     );

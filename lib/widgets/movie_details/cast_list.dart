@@ -33,44 +33,14 @@ class CastList extends StatelessWidget {
           List<Cast> casts = prov.casts ?? [];
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return RepaintBoundary(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: PaddingMovieDetails.allEight / 2,
-                        child: SizedBox(
-                            width: MovieDetailsBoxProperties.castWidth,
-                            height: MovieDetailsBoxProperties.castHeight,
-                            child: const Center(
-                              child: RepaintBoundary(
-                                child: CircularProgressIndicator(),
-                              ),
-                            )),
-                      ),
-                      SizedBox(
-                        width: MovieDetailsBoxProperties.castWidth,
-                        child: Text(
-                          "",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount: 5,
-              ),
-            );
+            return const SizedBox();
           } else {
             return RepaintBoundary(
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
+                  print(index);
+
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,

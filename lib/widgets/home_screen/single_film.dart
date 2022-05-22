@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:latest_movies_app/core/components/page_route.dart';
-import 'package:latest_movies_app/core/constants/box_properties/box_prop_movie_details.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/screens/movie_details.dart';
@@ -53,53 +52,56 @@ class _SingleFilmItemState extends State<SingleFilmItem> {
           color: Colors.transparent,
         ),
         child: InkWell(
-          onTap: () => Navigator.of(context).push(
-            createRoute(
-              MovieDetails(
-                contextForPalet: context,
-                backgroungPath: widget.backgroungPath,
-                imagePath: widget.imagePath,
-                name: widget.name,
-                overview: widget.overview,
-                id: widget.id,
-                releaseDate: widget.releaseDate,
-                voteAverage: widget.voteAverage,
-                voteCount: widget.voteCount,
-                movieList: widget.movieList,
-                value: widget.value,
-                typeOfList: widget.typeOfList,
-                adult: widget.adult,
+          onTap: () {
+            Navigator.of(context).push(
+              createRoute(
+                MovieDetails(
+                  contextForPalet: context,
+                  backgroungPath: widget.backgroungPath,
+                  imagePath: widget.imagePath,
+                  name: widget.name,
+                  overview: widget.overview,
+                  id: widget.id,
+                  releaseDate: widget.releaseDate,
+                  voteAverage: widget.voteAverage,
+                  voteCount: widget.voteCount,
+                  movieList: widget.movieList,
+                  value: widget.value,
+                  typeOfList: widget.typeOfList,
+                  adult: widget.adult,
+                ),
+                x: 1,
+                y: 1,
               ),
-              x: 1,
-              y: 1,
-            ),
-          ),
+            );
+          },
           child: Hero(
-            tag: _getTag(),
+            tag: widget.name,
             child: Material(
-        color: Colors.transparent,
-        child: SizedBox(
-          child: AspectRatio(
-            aspectRatio: 7 / 10.2,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(widget.imagePath),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  widget.name,
-                  style: Theme.of(context).textTheme.bodyText2!.copyWith(),
-                  textAlign: TextAlign.center,
+              color: Colors.transparent,
+              child: SizedBox(
+                child: AspectRatio(
+                  aspectRatio: 7 / 10.2,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: CachedNetworkImageProvider(widget.imagePath),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        widget.name,
+                        style:
+                            Theme.of(context).textTheme.bodyText2!.copyWith(),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
           ),
         ),
       ),
