@@ -43,6 +43,9 @@ class MoviesProv extends ChangeNotifier {
   final String imageNotFoundUrl =
       "https://blog.hubspot.com/hubfs/Sales_Blog/famous-movie-quotes.jpg";
 
+  final String reviewsUrl =
+      "https://api.themoviedb.org/3/movie/550?api_key=9240023865dd052e90b0564d9b5f6179&language=en-US";
+
   List<Cast>? casts = [];
 
   List<Movie>? populars = [];
@@ -256,5 +259,14 @@ class MoviesProv extends ChangeNotifier {
     // return x;
     // // final x = Credit.fromJson(response.data ?? {});
     // // print(x.id);
+  }
+
+  Future<void> getReviews(String movieId) async {
+    movieId = "550";
+    String getReviewsUrl =
+        "https://api.themoviedb.org/3/movie/$movieId?api_key=9240023865dd052e90b0564d9b5f6179&language=en-US";
+
+    Response<Map> response = await dio.get(getReviewsUrl);
+    print(response.data);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/cast.dart';
+import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/work/cast_detail_screen.dart';
 import 'package:provider/provider.dart';
@@ -42,60 +43,16 @@ class _WorkScreenState extends State<WorkScreen> {
       appBar: AppBar(
         title: Text("Latest Movies"),
       ),
-      body: Column(
-        children: [
-          FutureBuilder(
-              future: Provider.of<MoviesProv>(context, listen: false)
-                  .getCastandDetails("550"),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                }
-                List<Cast> casts = prov.casts ?? [];
-                print(casts.length);
-                return Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      print(casts[index].creditId.toString());
-                      return ListTile(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => CastDetailsScreen(
-                              castId: casts[index].id.toString(),
-                            ),
-                          ));
-                        },
-                        title: Text(
-                          casts[index].name as String,
-                        ),
-                        subtitle: Text(
-                          casts[index].character as String,
-                        ),
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            casts[index].profilePath != null
-                                ? "https://image.tmdb.org/t/p/w500" +
-                                    (casts[index].profilePath!)
-                                : "https://i0.wp.com/1.bp.blogspot.com/_saHCz6YS_o0/S2gmYeLBmXI/AAAAAAAAAds/XeUYqR1QWAY/s320/unknown-person.gif?zoom=2",
-                          ),
-                        ),
-                        trailing: Text(casts[index].id.toString()),
-                      );
-                    },
-                    itemCount: casts.length,
-                  ),
-                );
-              }),
-          Center(
-            child: ElevatedButton(
-              child: Text("get casts and details"),
-              onPressed: () async {
-                await prov.getCastandDetails("550");
-              },
-            ),
-          ),
-        ],
+      body: Center(
+        child: ElevatedButton(
+          child: Text("123"),
+          onPressed: () async {
+            await Provider.of<MoviesProv>(context, listen: false)
+                .getReviews("550");
+          },
+        ),
       ),
+
       // body: FutureBuilder(
       //   future: prov.getRecommendeds(movieId: "100", pageNumber: 1),
       //   builder: (context, snapshot) {

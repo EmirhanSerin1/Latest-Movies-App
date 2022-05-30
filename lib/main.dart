@@ -5,6 +5,7 @@ import 'package:latest_movies_app/providers/auth.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
 import 'package:latest_movies_app/screens/home_screen.dart';
 import 'package:latest_movies_app/work/login/login_screen.dart';
+import 'package:latest_movies_app/work/work_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.hasData ||
                       FirebaseAuth.instance.currentUser != null) {
-                    return const HomeScreen();
+                    return const WorkScreen();
                   } else {
                     return const LoginScreen();
                   }
