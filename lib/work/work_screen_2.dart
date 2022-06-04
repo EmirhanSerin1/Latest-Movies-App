@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:latest_movies_app/models/movie.dart';
 import 'package:latest_movies_app/providers/movies_prov.dart';
@@ -6,18 +7,18 @@ import 'package:latest_movies_app/work/video/metadata.dart';
 import 'package:provider/provider.dart';
 
 class WorkScreen2 extends StatefulWidget {
-  final Movie movie;
-  const WorkScreen2({Key? key, required this.movie}) : super(key: key);
+  // final Movie movie;
+  const WorkScreen2({Key? key}) : super(key: key);
 
   @override
   State<WorkScreen2> createState() => _WorkScreen2State();
 }
 
 class _WorkScreen2State extends State<WorkScreen2> {
-  late Movie movieItem;
+  // late Movie movieItem;
   @override
   void initState() {
-    movieItem = widget.movie;
+    // movieItem = widget.movie;
 
     super.initState();
   }
@@ -26,20 +27,18 @@ class _WorkScreen2State extends State<WorkScreen2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: FutureBuilder(
-          future: Provider.of<MoviesProv>(context, listen: false)
-              .getTrailer(movieId: movieItem.id.toString()),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            // controller.dispose();
-
-            return MetaDataa(url: (snapshot.data as String));
-            //  VideoEmbed(url: (snapshot.data as String));
-          }),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("listedMovies")
+            .where("listId", isEqualTo: "9SAYUXBXMKPz28AqiR8u")
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return Center(child: Text("1231"));
+        },
+      ),
       //  FutureBuilder<String?>(
       //     future: Provider.of<MoviesProv>(context)
       //         .getTrailer(movieId: movieItem.id.toString()),

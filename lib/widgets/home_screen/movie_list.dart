@@ -27,6 +27,7 @@ class MovieList extends StatelessWidget {
                 itemCount: itemList!.length,
                 itemBuilder: (context, index) {
                   Movie item = getItem(value, index);
+
                   return SingleFilmItem(
                     adult: item.adult,
                     overview: item.overview ?? "",

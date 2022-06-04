@@ -1,9 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:latest_movies_app/models/cast.dart';
-import 'package:latest_movies_app/models/movie.dart';
-import 'package:latest_movies_app/providers/movies_prov.dart';
-import 'package:latest_movies_app/work/cast_detail_screen.dart';
+import 'package:flutterfire_ui/firestore.dart';
+import 'package:latest_movies_app/widgets/drawer/log_out_alert_dialog.dart';
+import 'package:latest_movies_app/work/add_remove_listButton.dart';
+import 'package:latest_movies_app/work/listof_userLists.dart';
+import 'package:latest_movies_app/work/work_screen_2.dart';
+import '../models/cast.dart';
+import '../models/movie.dart';
+import '../providers/favorites_prov.dart';
+import '../providers/movies_prov.dart';
+import 'cast_detail_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class WorkScreen extends StatefulWidget {
   const WorkScreen({Key? key}) : super(key: key);
@@ -16,115 +25,51 @@ class _WorkScreenState extends State<WorkScreen> {
   String? url;
   @override
   Widget build(BuildContext context) {
-    MoviesProv prov = Provider.of<MoviesProv>(context, listen: false);
+    MoviesProv moviesProv = Provider.of<MoviesProv>(context, listen: false);
+    Favorites fav_prov = Provider.of<Favorites>(context, listen: false);
 
     return Scaffold(
-      floatingActionButton: Consumer<MoviesProv>(
-        builder: (context, value, child) => FloatingActionButton(
-          onPressed: () async {
-            value.currentRecommendedPages;
-            if (value.currentRecommendedPages <
-                (prov.totalRecommendedPages as num)) {
-              value.currentRecommendedPages++;
-            } else {
-              value.currentRecommendedPages = 1;
-            }
-
-            await prov.getRecommendeds(
-              movieId: "100",
-              pageNumber: value.currentRecommendedPages,
-            );
-          },
-          child: Text(value.currentRecommendedPages.toString() +
-              "/" +
-              value.totalRecommendedPages.toString()),
-        ),
-      ),
+      // floatingActionButton: AddRemoveListButton(),
       appBar: AppBar(
         title: Text("Latest Movies"),
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text("123"),
-          onPressed: () async {
-            await Provider.of<MoviesProv>(context, listen: false)
-                .getReviews("550");
-          },
-        ),
+      body: FutureBuilder(
+        future: moviesProv.getLatestMovies(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          List<Movie>? films = moviesProv.latestMovies;
+          return ListView.builder(
+            itemCount: films!.length,
+            itemBuilder: (context, index) => ListTile(
+              onTap: () async {
+                print(1);
+                await fav_prov.addToList(
+                  "9SAYUXBXMKPz28AqiR8u",
+                  films[index].id.toString(),
+                  films[index].title,
+                  films[index].posterPath ?? "",
+                  films[index].backdrop_path ?? "",
+                  films[index].release_date,
+                );
+                print(23);
+                //   await showDialog(
+                //       context: context,
+                //       builder: (context) {
+                //         return ListOfUserLists();
+                //       });
+              },
+              leading: CircleAvatar(
+                backgroundImage:
+                    NetworkImage(films[index].posterPath as String),
+              ),
+              title: Text(films[index].title),
+              trailing: Text(films[index].id.toString()),
+            ),
+          );
+        },
       ),
-
-      // body: FutureBuilder(
-      //   future: prov.getRecommendeds(movieId: "100", pageNumber: 1),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return const Center(child: CircularProgressIndicator());
-      //     }
-      //     return Center(
-      //       child: Column(
-      //         mainAxisSize: MainAxisSize.min,
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           Consumer<MoviesProv>(
-      //             builder: ((context, value, child) {
-      //               return Expanded(
-      //                 child: value.recommendeds!.isEmpty
-      //                     ? const Center(
-      //                         child: Text("We could not find result"),
-      //                       )
-      //                     : ListView.builder(
-      //                         itemCount: value.recommendeds?.length,
-      //                         itemBuilder: (context, index) {
-      //                           Movie item = value.recommendeds![index];
-      //                           // print(item.backdrop_path);
-      //                           return ListTile(
-      //                             leading: CircleAvatar(
-      //                               backgroundImage:
-      //                                   NetworkImage(item.posterPath ?? ""),
-      //                             ),
-      //                             title: Text(item.title),
-      //                             subtitle: Text(
-      //                                 item.overview ?? "Overview not found"),
-      //                             trailing: Text(item.release_date),
-      //                             onTap: () async {
-      //                               // Movie details = await prov.getDetails(item.id);
-      //                               // return;
-      //                               // await prov.getTrailer(
-      //                               //   movieId: item.id.toString(),
-      //                               // );
-      //                               // return;
-      //                               Navigator.of(context)
-      //                                   .push(MaterialPageRoute(
-      //                                 builder: (context) {
-      //                                   return WorkScreen2(movie: item);
-      //                                 },
-      //                               ));
-      //                               // print(details.posterPath ?? "null");
-      //                             },
-      //                           );
-      //                         },
-      //                       ),
-      //               );
-      //             }),
-      //           ),
-      //           // ElevatedButton(
-      //           //   onPressed: () async {
-      //           //     if (pageNumber < (prov.totalLatestPages as num)) {
-      //           //       pageNumber++;
-      //           //     } else {
-      //           //       pageNumber = 1;
-      //           //     }
-      //           //     print(prov.totalLatestPages);
-      //           //     print(pageNumber);
-
-      //           //     await prov.getLatestMovies(pageNumber: pageNumber);
-      //           //   },
-      //           //   child: Text("Next Page"),
-      //           // )
-      //         ],
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 }
